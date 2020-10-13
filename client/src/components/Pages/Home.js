@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+//reuxu
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../../redux/actions/productsAction";
 
-import { PageLayout } from "components/common";
+import { PageLayout, Loader } from "components/common";
 import { Card, CardContainer } from "components/UI";
 
 const Home = () => {
-   const [products, setProducts] = useState(false);
+   const dispatch = useDispatch();
 
+   const productLists = useSelector((state) => state.productList);
+   const { loading, error, products } = productLists;
    useEffect(() => {
-      const fetchProducts = async () => {
-         const {
-            data: { data },
-         } = await axios.get("/api/products");
-         setProducts(data);
-      };
-      fetchProducts();
-   }, []);
+      dispatch(listProducts());
+   }, [dispatch]);
+
    return (
       <PageLayout>
+         <h1>Is this the real life</h1>
+         <h4>Is this just fantasy</h4>
          <CardContainer>
-            {products &&
+            {loading ? (
+               <Loader />
+            ) : error ? (
+               <h1>{error}</h1>
+            ) : (
+               products &&
                products.map((p) => {
                   return (
                      <Card key={p._id} to={`/${p._id}`}>
                         {p.name}
                      </Card>
                   );
-               })}
+               })
+            )}
          </CardContainer>
       </PageLayout>
    );
