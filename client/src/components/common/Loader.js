@@ -1,4 +1,5 @@
 import ContentLoader from "react-content-loader";
+
 import { useMediaQuery } from "react-responsive";
 import React from "react";
 
@@ -80,7 +81,7 @@ const Loader = () => {
 };
 
 const Spinner = (props) => {
-   return <h1>Spinner</h1>;
+   return <div>Loading</div>;
 };
 
 export { Loader, Spinner };

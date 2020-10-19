@@ -17,8 +17,6 @@ const Home = () => {
 
    return (
       <PageLayout>
-         <h1>Is this the real life</h1>
-         <h4>Is this just fantasy</h4>
          <CardContainer>
             {loading ? (
                <Loader />
@@ -28,7 +26,7 @@ const Home = () => {
                products &&
                products.map((p) => {
                   return (
-                     <Card key={p._id} to={`/${p._id}`}>
+                     <Card key={p._id} to={`product/${p._id}`}>
                         {p.name}
                      </Card>
                   );

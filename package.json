@@ -5,7 +5,7 @@
   "description": "Project learnt from brad traversy",
   "main": "server.js",
   "scripts": {
-    "start":"node server/server.js",
+    "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
     "app": "concurrently \"npm run server\" \"npm run client\"",

@@ -18,12 +18,23 @@ const GlobalStyle = createGlobalStyle`
    body{
       /* font-family: 'Source Sans Pro', sans-serif; */
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #3c3b37;
+   }
+   h4{
+      font-size:22px;
+      font-weight:500;
+   }
+   Link{
+      text-decoration:none;
+   }
+   Link:hover{
+      cursor:pointer;
    }
 `;
 
 const theme = {
    linkColor: "#007791",
-   linkColorLight: "#009688",
+   linkColorLight: "#8ed1dc",
    fontColor: "#505763",
    fontColorDark: "#29303b",
    fontColorLight: "#d1d3dc",

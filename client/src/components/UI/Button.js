@@ -5,15 +5,17 @@ const Button = styled.button`
    border-radius: 3px;
    border: ${(p) => p.theme.cardBorder};
    outline: none;
+   border: none;
+
    ${(p) =>
       p.primary
          ? css`
-              border: none;
               background-color: ${(p) => p.theme.btnPrimaryColor};
               color: white;
            `
          : css`
-              background-color: white;
+              background-color: #0f7c90;
+              color: white;
            `}
    background: ${(p) => (p.disabled ? "grey" : "")};
    ${(p) =>
@@ -23,7 +25,7 @@ const Button = styled.button`
               padding: 10px 15px;
            `
          : css`
-              font-size: 17px;
+              font-size: 16px;
               padding: 12px 20px;
            `}
    &:hover {

@@ -4,14 +4,14 @@ import styled from "styled-components/macro";
 const Content = styled.main`
    max-width: 1200px;
    margin: auto;
-   min-height: 500px;
+   /* min-height: 500px; */
    font-size: 1.6rem;
 `;
 
 const PageLayout = (props) => {
    return (
       <>
-         <Content>{props.children}</Content>;
+         <Content {...props}>{props.children}</Content>;
       </>
    );
 };
