@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import styled from "styled-components"
 
-import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../../redux/actions/productsAction";
-import { PageLayout } from "components/common/PageLayout";
-import { Button } from "components/UI";
-import { Spinner } from "components/common/Loader";
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart } from "../../redux/actions/cartAction"
+import { listProductDetails } from "../../redux/actions/productsAction"
+
+import { PageLayout } from "components/common/PageLayout"
+import { Button } from "components/UI"
+import { Spinner } from "components/common/Loader"
 
 const StyledLink = styled.span`
    color: ${(p) => p.theme.linkColorLight};
@@ -14,16 +16,20 @@ const StyledLink = styled.span`
    /* padding: 4px 0; */
    font-weight: 700;
    margin: 0 5px;
-`;
+`
 
-const ProductDetails = ({ match }) => {
-   const dispatch = useDispatch();
-   const productDetails = useSelector((state) => state.productDetails);
-   const { loading, error, product } = productDetails;
-   // console.log(match.params.id);
+const ProductDetails = ({ match, history }) => {
+   const dispatch = useDispatch()
+   const productDetails = useSelector((state) => state.productDetails)
+   const { loading, error, product } = productDetails
    useEffect(() => {
-      dispatch(listProductDetails(match.params.id));
-   }, [dispatch, match]);
+      dispatch(listProductDetails(match.params.id))
+   }, [dispatch, match])
+
+   const addToCartHandler = () => {
+      dispatch(addToCart(match.params.id))
+      // history.push(`/cart/${match.params.id}`)
+   }
    return (
       <>
          {error ? (
@@ -33,11 +39,12 @@ const ProductDetails = ({ match }) => {
                style={{
                   minHeight: "150px",
                   maxWidth: "100vw",
-                  padding: "0 24px",
+                  // padding: "0 24px",
 
                   backgroundColor: " rgb(31, 36, 45)",
                   background: "linear-gradient(#29303b, #29303b, #29303b)",
-               }}>
+               }}
+            >
                <PageLayout style={{ maxWidth: "1000px" }}>
                   {loading ? (
                      <Spinner />
@@ -49,7 +56,8 @@ const ProductDetails = ({ match }) => {
                               overflow: "hidden",
                               display: "flex",
                               alignItems: "center",
-                           }}>
+                           }}
+                        >
                            <Link to='/'>
                               <StyledLink>Home</StyledLink>
                            </Link>
@@ -63,8 +71,13 @@ const ProductDetails = ({ match }) => {
                               stroke='#ffffff'
                               fill='none'
                               stroke-linecap='round'
-                              stroke-linejoin='round'>
-                              <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                              stroke-linejoin='round'
+                           >
+                              <path
+                                 stroke='none'
+                                 d='M0 0h24v24H0z'
+                                 fill='none'
+                              />
                               <polyline points='9 6 15 12 9 18' />
                            </svg>
                            <Link to='/category'>
@@ -80,8 +93,13 @@ const ProductDetails = ({ match }) => {
                               stroke='#ffffff'
                               fill='none'
                               stroke-linecap='round'
-                              stroke-linejoin='round'>
-                              <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                              stroke-linejoin='round'
+                           >
+                              <path
+                                 stroke='none'
+                                 d='M0 0h24v24H0z'
+                                 fill='none'
+                              />
                               <polyline points='9 6 15 12 9 18' />
                            </svg>
                            <Link to={`/product/${product._id}`}>
@@ -106,13 +124,15 @@ const ProductDetails = ({ match }) => {
                            style={{
                               color: "white",
                               padding: "16px 0",
-                           }}>
+                           }}
+                        >
                            <h4
                               style={{
                                  marginBottom: "8px",
                                  textTransform: "uppercase",
                                  letterSpacing: "2px",
-                              }}>
+                              }}
+                           >
                               {product.name}
                            </h4>
                            <p
@@ -120,21 +140,24 @@ const ProductDetails = ({ match }) => {
                                  color: "#d1d3dc",
                                  fontSize: "14px",
                                  marginBottom: "8px",
-                              }}>
+                              }}
+                           >
                               {product.description}
                            </p>
                            <h4
                               style={{
                                  fontSize: "22px",
                                  fontWeight: "300",
-                              }}>
+                              }}
+                           >
                               {product.price}.00
                            </h4>
                            <div
                               style={{
                                  padding: "16px 0",
-                              }}>
-                              <Button onClick={() => console.log("wait a minute")}>
+                              }}
+                           >
+                              <Button onClick={addToCartHandler}>
                                  Add to Cart
                               </Button>
                            </div>
@@ -150,7 +173,7 @@ const ProductDetails = ({ match }) => {
             </div>
          )}
       </>
-   );
-};
+   )
+}
 
-export default ProductDetails;
+export default ProductDetails

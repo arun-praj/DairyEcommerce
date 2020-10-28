@@ -29,9 +29,9 @@ const Home = () => {
                      <Card key={p._id} to={`product/${p._id}`}>
                         {p.name}
                      </Card>
-                  );
+                  ); 
                })
-            )}
+            ) }
          </CardContainer>
       </PageLayout>
    );

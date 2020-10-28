@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components/macro";
+import React, { useState, useEffect } from "react"
+import { createGlobalStyle, ThemeProvider } from "styled-components/macro"
+import { useDispatch } from "react-redux"
 
-import Routes from "components/Routes";
-import Nav from "components/layout/Nav";
-import SideDrawer from "components/layout/SideDrawer";
-import Backdrop from "components/layout/Backdrop";
+//redux
+import { loadUser } from "redux/actions/authAction"
+
+import Routes from "components/Routes"
+import Nav from "components/layout/Nav"
+import SideDrawer from "components/layout/SideDrawer"
+import Backdrop from "components/layout/Backdrop"
 
 const GlobalStyle = createGlobalStyle`
    :root{
@@ -30,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
    Link:hover{
       cursor:pointer;
    }
-`;
+`
 
 const theme = {
    linkColor: "#007791",
@@ -39,24 +43,37 @@ const theme = {
    fontColorDark: "#29303b",
    fontColorLight: "#d1d3dc",
    cardBorder: "solid 1px #dcdacb",
-   cardShadow: "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
+   cardShadow:
+      "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
    btnPrimaryColor: "#ec5252",
-};
+}
 
 const App = () => {
-   const [isSideDrawerOpen, sideDrawerToggler] = useState(false);
+   const dispatch = useDispatch()
 
-   const sideDrawerHandler = () => sideDrawerToggler(!isSideDrawerOpen);
+   useEffect(() => {
+      dispatch(loadUser())
+   }, [dispatch])
+
+   const [isSideDrawerOpen, sideDrawerToggler] = useState(false)
+
+   const sideDrawerHandler = () => sideDrawerToggler(!isSideDrawerOpen)
 
    return (
       <ThemeProvider theme={theme}>
          <GlobalStyle />
          <Nav clickHandler={sideDrawerHandler} />
-         <SideDrawer clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
-         <Backdrop clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
+         <SideDrawer
+            clickHandler={sideDrawerHandler}
+            isSideDrawerOpen={isSideDrawerOpen}
+         />
+         <Backdrop
+            clickHandler={sideDrawerHandler}
+            isSideDrawerOpen={isSideDrawerOpen}
+         />
          <Routes />
       </ThemeProvider>
-   );
-};
+   )
+}
 
-export default App;
+export default App

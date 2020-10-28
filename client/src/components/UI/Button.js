@@ -1,12 +1,15 @@
-import styled, { css } from "styled-components/macro";
+import styled, { css } from "styled-components/macro"
 
 const Button = styled.button`
    width: 100%;
+   min-height: 42px;
    border-radius: 3px;
    border: ${(p) => p.theme.cardBorder};
    outline: none;
    border: none;
-
+   display: flex;
+   justify-content: center;
+   align-items: center;
    ${(p) =>
       p.primary
          ? css`
@@ -17,7 +20,7 @@ const Button = styled.button`
               background-color: #0f7c90;
               color: white;
            `}
-   background: ${(p) => (p.disabled ? "grey" : "")};
+   /* background: ${(p) => (p.disabled ? "grey" : "")}; */
    ${(p) =>
       p.large
          ? css`
@@ -34,7 +37,8 @@ const Button = styled.button`
    }
    &:disabled {
       cursor: no-drop;
+      filter: brightness(0.7);
    }
-`;
+`
 
-export { Button }; // named export
+export { Button } // named export
