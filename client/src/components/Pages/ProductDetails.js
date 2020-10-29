@@ -8,7 +8,7 @@ import { listProductDetails } from "../../redux/actions/productsAction"
 
 import { PageLayout } from "components/common/PageLayout"
 import { Button } from "components/UI"
-import { Spinner } from "components/common/Loader"
+import Spinner from "components/UI/Spinner/Spinner"
 
 const StyledLink = styled.span`
    color: ${(p) => p.theme.linkColorLight};
@@ -47,7 +47,7 @@ const ProductDetails = ({ match, history }) => {
             >
                <PageLayout style={{ maxWidth: "1000px" }}>
                   {loading ? (
-                     <Spinner />
+                     <Spinner position='center' />
                   ) : (
                      <div>
                         <div

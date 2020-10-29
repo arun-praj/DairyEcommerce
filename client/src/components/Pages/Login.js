@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 import { Link } from "react-router-dom"
 import { login } from "../../redux//actions/authAction"
@@ -7,16 +7,21 @@ import { Button } from "components/UI"
 import { PageLayout, Input, FormContainer } from "components/common"
 import { usePromiseTracker } from "react-promise-tracker"
 import Spinner from "components/UI/Spinner/Spinner"
-const Login = ({ location }) => {
-   // const dis = true;
+const Login = ({ location, history }) => {
    const dispatch = useDispatch()
    const { promiseInProgress } = usePromiseTracker()
    const [formData, setFormData] = useState({
       email: "",
       password: "",
    })
+   const { userInfo, error } = useSelector((state) => state.userDetail)
    const redirect = location.search ? location.search.split("=")[1] : "/"
 
+   useEffect(() => {
+      if (userInfo) {
+         history.push(redirect)
+      }
+   }, [history, userInfo, redirect])
    const formDataHandler = (e) => {
       e.persist()
       setFormData((prevState) => {
@@ -34,6 +39,31 @@ const Login = ({ location }) => {
    return (
       <PageLayout>
          <FormContainer>
+            {error ? (
+               <div
+                  style={{
+                     color: " #333333bb",
+
+                     backgroundColor: "#f8d7da",
+                     borderColor: "#f5c6cb",
+                     padding: "12px 20px",
+                  }}
+               >
+                  {error}
+               </div>
+            ) : (
+               <div
+                  style={{
+                     color: " #ffffff",
+                     backgroundColor: "#ffffff",
+                     borderColor: "#ffffff",
+                     padding: "12px 20px",
+                  }}
+               >
+                  sadfas
+               </div>
+            )}
+
             <h4
                style={{ margin: "15px 0", fontSize: "17px", fontWeight: "600" }}
             >
@@ -92,7 +122,7 @@ const Login = ({ location }) => {
                onChange={formDataHandler}
             />
             <Button
-               primary
+               type='primary'
                disabled={promiseInProgress ? true : false}
                onClick={submitHandler}
             >

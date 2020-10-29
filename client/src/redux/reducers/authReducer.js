@@ -4,6 +4,7 @@ import {
    USER_LOGIN_SUCCESS,
    LOAD_USER_FROM_TOKEN_SUCCESS,
    LOAD_USER_FROM_TOKEN_FAILED,
+   USER_LOGOUT,
 } from "../actions/types"
 
 const authState = {
@@ -52,7 +53,15 @@ const authReducer = (state = authState, action) => {
             error: null,
             message: payload,
          }
-
+      case USER_LOGOUT:
+         localStorage.removeItem("token")
+         return {
+            ...state,
+            loading: false,
+            userInfo: null,
+            error: null,
+            message: null,
+         }
       default:
          return state
    }

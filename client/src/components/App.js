@@ -21,14 +21,17 @@ const GlobalStyle = createGlobalStyle`
    }
    body{
       /* font-family: 'Source Sans Pro', sans-serif; */
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+      font-family: 'Alegreya Sans', sans-serif;
+      /* font-family: 'Varela Round', sans-serif; */
       color: #3c3b37;
+      line-height: 1.2;
    }
    h4{
       font-size:22px;
       font-weight:500;
    }
-   Link{
+   Link,a{
       text-decoration:none;
    }
    Link:hover{

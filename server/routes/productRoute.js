@@ -10,7 +10,17 @@ import Product from "../models/ProductModel.js"
 router.get(
    "/",
    asyncHandler(async (req, res) => {
-      const products = await Product.find({})
+      const keyword = req.query.keyword
+         ? {
+              name: {
+                 $regex: req.query.keyword,
+                 $options: "i",
+              },
+           }
+         : {}
+
+      const products = await Product.find({ ...keyword })
+
       if (products.length > 0) {
          return res
             .json({
@@ -20,15 +30,21 @@ router.get(
             })
             .status(200)
       }
-      res.json({
-         message: "Product Database empty",
-      })
+      res.status(404)
+      throw new Error("Product not found")
+
+      // res.json({
+      //    count: products.length,
+      //    data: "Empty",
+
+      //    message: "Product Database empty",
+      // })
    })
 )
 
-//@description      Get product by id
-//@Routes           GET /api/products/:id
-//@access           public
+// @description      Get product by id
+// @Routes           GET /api/products/:id
+// @access           public
 router.get(
    "/:id",
    asyncHandler(async (req, res) => {

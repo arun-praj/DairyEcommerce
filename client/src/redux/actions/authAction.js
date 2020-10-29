@@ -4,6 +4,7 @@ import {
    USER_LOGIN_SUCCESS,
    LOAD_USER_FROM_TOKEN_SUCCESS,
    LOAD_USER_FROM_TOKEN_FAILED,
+   USER_LOGOUT,
 } from "../actions/types"
 import axios from "axios"
 import { trackPromise } from "react-promise-tracker"
@@ -66,4 +67,9 @@ const loadUser = () => async (dispatch) => {
       })
    }
 }
-export { login, loadUser }
+
+const logout = () => async (dispatch) => {
+   dispatch({ type: USER_LOGOUT })
+}
+
+export { login, loadUser, logout }
