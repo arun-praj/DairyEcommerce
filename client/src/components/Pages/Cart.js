@@ -30,8 +30,6 @@ const Cart = ({ match, history, location }) => {
 
    const { cart } = useSelector((state) => state.cart)
 
-   // console.log(cart)
-
    const productId = match.params.id
    const qty = location.search ? location.search.split("=") : 1
 

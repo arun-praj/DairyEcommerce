@@ -8,6 +8,8 @@ import ProductDetails from "components/Pages/ProductDetails"
 const Routes = () => {
    return (
       <Switch>
+         <Route exact path='/' component={Home} />
+
          <Route exact path='/login' component={Login} />
          <Route exact path='/cart' component={Cart} />
          <Route
@@ -16,7 +18,7 @@ const Routes = () => {
             component={ProductDetails}
          />
          <Route exact path='/search/:keyword' component={Home} />
-         <Route exact path='/' component={Home} />
+         {/* <Route exact component={Home} /> */}
       </Switch>
    )
 }

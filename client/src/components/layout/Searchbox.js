@@ -29,10 +29,11 @@ const SearchInput = styled.input`
 `
 const SearchIcon = styled.i`
    position: absolute;
-   /* top: 0; */
-   right: 33px;
-   height: 24px;
-   width: 24px;
+   top: 50%;
+   right: 40px;
+   height: 10px;
+   width: 10px;
+   transform: translateY(-85%);
    fill: #000000;
    font-weight: 700;
 `
@@ -64,10 +65,10 @@ const Searchbox = ({ history }) => {
                <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='icon icon-tabler icon-tabler-search'
-                  width='24'
-                  height='24'
+                  width='18'
+                  height='18'
                   viewBox='0 0 24 24'
-                  strokeWidth='1.5'
+                  strokeWidth='2'
                   stroke='#2c3e50'
                   fill='none'
                   strokeLinecap='round'

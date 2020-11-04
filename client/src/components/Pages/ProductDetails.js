@@ -12,7 +12,7 @@ import Spinner from "components/UI/Spinner/Spinner"
 
 const StyledLink = styled.span`
    color: ${(p) => p.theme.linkColorLight};
-   font-size: 12px;
+   font-size: 14px;
    /* padding: 4px 0; */
    font-weight: 700;
    margin: 0 5px;
@@ -21,7 +21,9 @@ const StyledLink = styled.span`
 const ProductDetails = ({ match, history }) => {
    const dispatch = useDispatch()
    const productDetails = useSelector((state) => state.productDetails)
+   const cart = useSelector((state) => state.cart.cart)
    const { loading, error, product } = productDetails
+
    useEffect(() => {
       dispatch(listProductDetails(match.params.id))
    }, [dispatch, match])
@@ -30,6 +32,7 @@ const ProductDetails = ({ match, history }) => {
       dispatch(addToCart(match.params.id))
       // history.push(`/cart/${match.params.id}`)
    }
+
    return (
       <>
          {error ? (
@@ -128,9 +131,10 @@ const ProductDetails = ({ match, history }) => {
                         >
                            <h4
                               style={{
-                                 marginBottom: "8px",
-                                 textTransform: "uppercase",
-                                 letterSpacing: "2px",
+                                 marginBottom: "10.5px",
+                                 fontWeight: 700,
+                                 // textTransform: "uppercase",
+                                 // letterSpacing: "2px",
                               }}
                            >
                               {product.name}
@@ -140,26 +144,43 @@ const ProductDetails = ({ match, history }) => {
                                  color: "#d1d3dc",
                                  fontSize: "14px",
                                  marginBottom: "8px",
+                                 textAlign: "justify",
                               }}
                            >
                               {product.description}
                            </p>
-                           <h4
+                           {/* <h4
                               style={{
-                                 fontSize: "22px",
-                                 fontWeight: "300",
+                                 fontSize: "24px",
+                                 fontWeight: "100",
                               }}
                            >
-                              {product.price}.00
-                           </h4>
+                              Rs.{product.price}.00
+                           </h4> */}
                            <div
                               style={{
                                  padding: "16px 0",
                               }}
                            >
-                              <Button onClick={addToCartHandler}>
-                                 Add to Cart
-                              </Button>
+                              {cart.filter((item) => {
+                                 return item._id === product._id
+                              }).length === 0 ? (
+                                 <Button
+                                    type='secondary'
+                                    onClick={addToCartHandler}
+                                 >
+                                    Add to Cart
+                                 </Button>
+                              ) : (
+                                 <Link type='secondary' to='/cart'>
+                                    <Button
+                                       type='secondary'
+                                       onClick={addToCartHandler}
+                                    >
+                                       Go to Cart
+                                    </Button>
+                                 </Link>
+                              )}
                            </div>
                            <div style={{ fontSize: "14px", color: "#E91E63" }}>
                               {product.countInStock <= 10 ? (

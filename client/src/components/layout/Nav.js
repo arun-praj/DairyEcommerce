@@ -27,6 +27,7 @@ const NavWrapper = styled.nav`
 const Menu = styled.menu`
    display: flex;
    gap: 5px;
+   align-items: center;
    /* margin: auto 0px auto auto; */
    @media (max-width: 768px) {
       display: none;
@@ -114,7 +115,7 @@ const Nav = ({ clickHandler, history }) => {
             </HamburgerMenu>
 
             <StyledLink to='/' isActive={pathname === "/"}>
-               <img src={Logo} alt='logo' height='35px' />
+               <img src={Logo} alt='logo' height='30px' />
             </StyledLink>
 
             <Route render={({ history }) => <Searchbox history={history} />} />
@@ -124,12 +125,18 @@ const Nav = ({ clickHandler, history }) => {
                <LinkedButton to='/categories'>Products</LinkedButton>
                <DividerLine />
 
-               <StyledLink to='/cart' isActive={pathname === "/cart"}>
+               <StyledLink
+                  to='/cart'
+                  style={{
+                     padding: " 15px 16px 10px 6px",
+                  }}
+                  isActive={pathname === "/cart"}
+               >
                   <svg
                      xmlns='http://www.w3.org/2000/svg'
                      className='icon icon-tabler icon-tabler-shopping-cart'
-                     width='20'
-                     height='20'
+                     width='24'
+                     height='24'
                      viewBox='0 0 24 24'
                      strokeWidth='1.5'
                      stroke='#2c3e50'
@@ -147,7 +154,7 @@ const Nav = ({ clickHandler, history }) => {
                {loading ? (
                   <h1>Loading</h1>
                ) : userInfo ? (
-                  <h1>{userInfo.firstName}</h1>
+                  <div>{userInfo.firstName}</div>
                ) : (
                   <>
                      <Button to='/login' type='primary'>
