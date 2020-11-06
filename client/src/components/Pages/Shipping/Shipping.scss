@@ -2,16 +2,16 @@
    display: flex;
    &_right {
       border: 1px solid #e8e9eb;
-      box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
-         0 3px 1px 0 rgba(20, 23, 28, 0.1);
+      box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1);
 
-      // display: table;
+      display: table;
       margin-bottom: 10px;
       padding: 24px 24px 0;
       position: sticky;
       position: -webkit-sticky;
       top: 8em;
       width: 40%;
+      min-height: 70px;
    }
    &_left {
       margin-right: 32px;
@@ -90,6 +90,12 @@
       gap: 32px;
       &_right {
          width: 100%;
+         border: none;
+         border-top: 1px solid #e8e9eb;
+         box-shadow: none;
+         display: table;
+         margin-bottom: 10px;
+         padding: 24px 0;
       }
       &_left {
          width: 100%;
@@ -99,5 +105,13 @@
       flex: 0 1 calc(100%);
 
       // width: 100%;
+   }
+}
+
+.radio {
+   margin: 10px 0;
+   // padding-right: 10px;
+   &_label {
+      padding-left: 10px;
    }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Backdrop = ({ clickHandler, isSideDrawerOpen }) => {
    return (
@@ -8,7 +8,7 @@ const Backdrop = ({ clickHandler, isSideDrawerOpen }) => {
             top: "0",
             left: "0",
             zIndex: "1",
-            height: "100vh",
+            height: "100%",
             width: "100vw",
             // backgroundColor: "rgba(255, 255, 255, 0.95)",
             filter: "blur(10px)",
@@ -16,8 +16,9 @@ const Backdrop = ({ clickHandler, isSideDrawerOpen }) => {
 
             display: isSideDrawerOpen ? "block" : "none",
          }}
-         onClick={clickHandler}></div>
-   );
-};
+         onClick={clickHandler}
+      ></div>
+   )
+}
 
-export default Backdrop;
+export default Backdrop

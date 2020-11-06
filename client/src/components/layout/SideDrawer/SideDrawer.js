@@ -10,7 +10,7 @@ import { Button } from "components/UI/Button"
 import "./SideDrawer.scss"
 
 const AnimatedSideDiv = styled(motion.div)`
-   height: 100vh;
+   height: 100%;
    width: 300px;
    position: absolute;
    border: 1px solid #dcdadb;
@@ -22,9 +22,7 @@ const AnimatedSideDiv = styled(motion.div)`
 
 const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
    const dispatch = useDispatch()
-   const { userInfo, loading, isAuth } = useSelector(
-      (state) => state.userDetail
-   )
+   const { userInfo, loading, isAuth } = useSelector((state) => state.userDetail)
    const logoutHandler = () => {
       dispatch(logout())
       clickHandler()
@@ -40,10 +38,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                      marginRight: "14px",
                   }}
                >
-                  <ProfilePic
-                     firstName={userInfo.firstName}
-                     lastName={userInfo.lastName}
-                  />
+                  <ProfilePic firstName={userInfo.firstName} lastName={userInfo.lastName} />
                </div>
                <div
                   style={{
@@ -52,9 +47,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                      justifyContent: "space-between",
                   }}
                >
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>
-                     {`${userInfo.firstName} ${userInfo.lastName}`}
-                  </span>
+                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{`${userInfo.firstName} ${userInfo.lastName}`}</span>
                   <span
                      style={{
                         fontSize: "12px",
@@ -84,11 +77,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                Log in
             </Button>
          </Link>
-         <Link
-            style={{ textDecoration: "none", color: "#29303b" }}
-            onClick={() => clickHandler()}
-            to='/register'
-         >
+         <Link style={{ textDecoration: "none", color: "#29303b" }} onClick={() => clickHandler()} to='/register'>
             <Button>Sign up</Button>
          </Link>
       </>
@@ -99,17 +88,15 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
          animate={{ x: isSideDrawerOpen ? "0" : "-100%" }}
          transition={{ type: "tween", stiffness: 100 }}
       >
-         <div className='sideDrawer__wrapper'>
-            <ul
-               className='sideDrawer__list'
-               style={{ borderBottom: "1px solid #e8e9eb" }}
-               onClick={() => clickHandler()}
-            >
+         <div
+            className='sideDrawer__wrapper'
+            style={{
+               overflowY: isSideDrawerOpen ? "hidden" : "auto",
+            }}
+         >
+            <ul className='sideDrawer__list' style={{ borderBottom: "1px solid #e8e9eb" }} onClick={() => clickHandler()}>
                <li className='sideDrawer__list--item '>
-                  <span
-                     className='sideDrawer__list--link'
-                     style={{ paddingTop: "0", paddingBottom: "0" }}
-                  >
+                  <span className='sideDrawer__list--link' style={{ paddingTop: "0", paddingBottom: "0" }}>
                      <svg className='sideDrawer__list--icon'>
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-chevron-left' />
                      </svg>
@@ -117,14 +104,9 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                   </span>
                </li>
             </ul>
-            <div className='sideDrawer__btns'>
-               {loading ? <h1>Loading</h1> : isAuth ? authLink : guestLink}
-            </div>
+            <div className='sideDrawer__btns'>{loading ? <h1>Loading</h1> : isAuth ? authLink : guestLink}</div>
             <ul className='sideDrawer__list'>
-               <li
-                  className='sideDrawer__list--item '
-                  onClick={() => clickHandler()}
-               >
+               <li className='sideDrawer__list--item ' onClick={() => clickHandler()}>
                   <Link to='/' className='sideDrawer__list--link'>
                      <svg className='sideDrawer__list--icon'>
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-home' />
@@ -132,10 +114,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                      <span>Home</span>
                   </Link>
                </li>
-               <li
-                  className='sideDrawer__list--item'
-                  onClick={() => clickHandler()}
-               >
+               <li className='sideDrawer__list--item' onClick={() => clickHandler()}>
                   <Link to='/product' className='sideDrawer__list--link'>
                      <svg className='sideDrawer__list--icon'>
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-bucket' />
@@ -143,10 +122,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                      <span>Product</span>
                   </Link>
                </li>
-               <li
-                  className='sideDrawer__list--item'
-                  onClick={() => clickHandler()}
-               >
+               <li className='sideDrawer__list--item' onClick={() => clickHandler()}>
                   <Link to='/' className='sideDrawer__list--link'>
                      <svg className='sideDrawer__list--icon'>
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-phone-incoming' />
@@ -158,10 +134,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
             {isAuth && (
                <ul className='sideDrawer__list'>
                   {/* <li className='sideDrawer__list--item '></li> */}
-                  <li
-                     className='sideDrawer__list--item'
-                     onClick={() => clickHandler()}
-                  >
+                  <li className='sideDrawer__list--item' onClick={() => clickHandler()}>
                      <Link to='/profile' className='sideDrawer__list--link'>
                         <svg className='sideDrawer__list--icon'>
                            <use xlinkHref='/icons/tabler-sprite.svg#tabler-brand-github' />
@@ -169,10 +142,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                         <span>My profile</span>
                      </Link>
                   </li>
-                  <li
-                     className='sideDrawer__list--item'
-                     onClick={() => clickHandler()}
-                  >
+                  <li className='sideDrawer__list--item' onClick={() => clickHandler()}>
                      <Link to='/profile' className='sideDrawer__list--link'>
                         <svg className='sideDrawer__list--icon'>
                            <use xlinkHref='/icons/tabler-sprite.svg#tabler-history' />

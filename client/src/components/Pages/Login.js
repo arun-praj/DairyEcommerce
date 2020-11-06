@@ -67,11 +67,7 @@ const Login = ({ location, history }) => {
                </div>
             )}
 
-            <h4
-               style={{ margin: "15px 0", fontSize: "17px", fontWeight: "600" }}
-            >
-               Log in to your account.
-            </h4>
+            <h4 style={{ margin: "15px 0", fontSize: "17px", fontWeight: "600" }}>Log in to your account.</h4>
 
             <Input
                type='email'
@@ -79,18 +75,7 @@ const Login = ({ location, history }) => {
                name='email'
                value={formData.email}
                icon={
-                  <svg
-                     xmlns='http://www.w3.org/2000/svg'
-                     className='icon icon-tabler icon-tabler-at'
-                     width='24'
-                     height='24'
-                     viewBox='0 0 24 24'
-                     stroke-width='1.5'
-                     stroke='#3b3b3b85'
-                     fill='none'
-                     stroke-linecap='round'
-                     stroke-linejoin='round'
-                  >
+                  <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-at' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='#3b3b3b85' fill='none' stroke-linecap='round' stroke-linejoin='round'>
                      <path stroke='none' d='M0 0h24v24H0z' fill='none' />
                      <circle cx='12' cy='12' r='4' />
                      <path d='M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28' />
@@ -104,18 +89,7 @@ const Login = ({ location, history }) => {
                placeholder='Password'
                value={formData.password}
                icon={
-                  <svg
-                     xmlns='http://www.w3.org/2000/svg'
-                     className='icon icon-tabler icon-tabler-lock'
-                     width='24'
-                     height='24'
-                     viewBox='0 0 24 24'
-                     strokeWidth='1.5'
-                     stroke='#3b3b3b85'
-                     fill='none'
-                     strokeLinecap='round'
-                     strokeLinejoin='round'
-                  >
+                  <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-lock' width='24' height='24' viewBox='0 0 24 24' strokeWidth='1.5' stroke='#3b3b3b85' fill='none' strokeLinecap='round' strokeLinejoin='round'>
                      <path stroke='none' d='M0 0h24v24H0z' fill='none' />
                      <rect x='5' y='11' width='14' height='10' rx='2' />
                      <circle cx='12' cy='16' r='1' />

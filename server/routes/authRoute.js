@@ -5,6 +5,7 @@ import asyncHandler from "express-async-handler"
 import User from "../models/UserModel.js"
 import generateToken from "../utils/generateWebToken.js"
 import protectUser from "../middlewares/authMiddleware.js"
+
 //@description      User login and get token
 //@Routes           GET /api/auth/login
 //@access           public
@@ -67,7 +68,6 @@ router.post(
 router.put(
    "/profile",
    protectUser,
-
    asyncHandler(async (req, res, next) => {
       const user = await User.findById(req.userId)
       if (user) {

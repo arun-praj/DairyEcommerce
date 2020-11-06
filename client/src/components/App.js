@@ -39,6 +39,10 @@ const GlobalStyle = createGlobalStyle`
    Link:hover{
       cursor:pointer;
    }
+      li {
+   list-style-type: none;
+}
+
 `
 
 const theme = {
@@ -48,8 +52,7 @@ const theme = {
    fontColorDark: "#29303b",
    fontColorLight: "#d1d3dc",
    cardBorder: "solid 1px #dcdacb",
-   cardShadow:
-      "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
+   cardShadow: "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
    btnPrimaryColor: "#ec5252",
 }
 
@@ -68,14 +71,8 @@ const App = () => {
       <ThemeProvider theme={theme}>
          <GlobalStyle />
          <Nav clickHandler={sideDrawerHandler} />
-         <SideDrawer
-            clickHandler={sideDrawerHandler}
-            isSideDrawerOpen={isSideDrawerOpen}
-         />
-         <Backdrop
-            clickHandler={sideDrawerHandler}
-            isSideDrawerOpen={isSideDrawerOpen}
-         />
+         <SideDrawer clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
+         <Backdrop clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
          <Routes />
       </ThemeProvider>
    )
