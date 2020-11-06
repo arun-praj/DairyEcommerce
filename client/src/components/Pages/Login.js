@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { login } from "../../redux//actions/authAction"
 import { Button } from "components/UI"
 import { PageLayout, Input, FormContainer } from "components/common"
@@ -14,14 +14,16 @@ const Login = ({ location, history }) => {
       email: "",
       password: "",
    })
-   const { userInfo, error } = useSelector((state) => state.userDetail)
+   const { error, isAuth } = useSelector((state) => state.userDetail)
    const redirect = location.search ? location.search.split("=")[1] : "/"
 
    useEffect(() => {
-      if (userInfo) {
+      if (isAuth) {
          history.push(redirect)
+         // return <Redirect to='/' />
       }
-   }, [history, userInfo, redirect])
+   }, [isAuth, history])
+
    const formDataHandler = (e) => {
       e.persist()
       setFormData((prevState) => {
@@ -38,6 +40,7 @@ const Login = ({ location, history }) => {
 
    return (
       <PageLayout>
+         {isAuth && <Redirect to='/' />}
          <FormContainer>
             {error ? (
                <div
@@ -67,7 +70,7 @@ const Login = ({ location, history }) => {
             <h4
                style={{ margin: "15px 0", fontSize: "17px", fontWeight: "600" }}
             >
-               Login to your account.
+               Log in to your account.
             </h4>
 
             <Input
@@ -125,16 +128,14 @@ const Login = ({ location, history }) => {
                type='primary'
                disabled={promiseInProgress ? true : false}
                onClick={submitHandler}
+               style={{
+                  marginTop: "25px",
+               }}
             >
-               {promiseInProgress ? <Spinner /> : "LOGIN"}
+               {promiseInProgress ? <Spinner /> : "LOG IN"}
             </Button>
             <div>
-               Dont have an account ?
-               <Link
-                  to={redirect ? `/register?redirect=${redirect}` : "register"}
-               >
-                  Sign up
-               </Link>
+               Dont have an account ?<Link to='register'>Sign up</Link>
             </div>
          </FormContainer>
       </PageLayout>

@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 
 const InputGroup = styled.div`
    position: relative;
-`;
+`
 
 const InputIcon = styled.i`
    position: absolute;
    top: 50%;
    transform: translateY(-50%);
    left: 3%;
-`;
+`
 
 const StyledInput = styled.input`
    width: 100%;
@@ -20,11 +20,12 @@ const StyledInput = styled.input`
    border-radius: 2px;
    display: block;
    outline: none;
-   margin-bottom: 25px;
+   margin-bottom: 8px;
+
    &::-webkit-input-placeholder {
       color: #3b3b3b85;
    }
-`;
+`
 
 const Input = (props) => {
    return (
@@ -38,10 +39,10 @@ const Input = (props) => {
             onChange={props.onChange}
          />
       </InputGroup>
-   );
-};
+   )
+}
 
-export { Input };
+export { Input }
 
 // const Form = ({...props}) => {
 //     return (

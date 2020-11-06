@@ -9,8 +9,11 @@ import Spinner from "components/UI/Spinner/Spinner"
 
 const Home = ({ match }) => {
    const dispatch = useDispatch()
+
    const searchedKeyword = match.params.keyword
+
    const productLists = useSelector((state) => state.productList)
+
    const { loading, error, products } = productLists
    useEffect(() => {
       dispatch(listProducts(searchedKeyword))

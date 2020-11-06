@@ -7,9 +7,11 @@ import { loadUser } from "redux/actions/authAction"
 
 import Routes from "components/Routes"
 import Nav from "components/layout/Nav"
-import SideDrawer from "components/layout/SideDrawer"
+import SideDrawer from "components/layout/SideDrawer/SideDrawer"
 import Backdrop from "components/layout/Backdrop"
 
+//scss
+import "sass/index.scss"
 const GlobalStyle = createGlobalStyle`
    :root{
       font-size:62.5%;

@@ -44,13 +44,15 @@ const Searchbox = ({ history }) => {
       // e.preventDefault()
       if (searchKeyword.trim()) {
          history.push(`/search/${searchKeyword}`)
-      } else {
-         history.push("/")
       }
+      // else {
+      //    history.push(`/`)
+      // }
    }
    useEffect(() => {
       submitHandler()
    }, [searchKeyword])
+
    return (
       <>
          <SearchField>

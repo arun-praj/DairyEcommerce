@@ -1,0 +1,72 @@
+/*======================
+    404 page
+=======================*/
+
+.page_404 {
+   height: 90vh;
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   //    align-items: center;
+
+   //    flex: 0 1 100%;
+   .four_zero_four_bg {
+      background-image: url("./404_animtion.gif");
+      background-repeat: no-repeat;
+      height: 400px;
+      width: 100%;
+      background-position: center;
+      h1 {
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+         font-size: 100px;
+         text-align: center;
+         margin-top: -50px;
+      }
+      .h4 {
+         font-size: 16px;
+      }
+      p {
+         font-size: 14px;
+      }
+   }
+}
+
+// .page_404 {
+//    padding: 40px 0;
+//    background: #fff;
+//    font-family: "Arvo", serif;
+//    display: flex;
+//    flex-direction: column;
+//    align-items: center;
+// }
+
+.page_404 img {
+   width: 100%;
+}
+
+.four_zero_four_bg h1 {
+   font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+   font-size: 80px;
+}
+
+.link_404 {
+   color: #fff !important;
+   padding: 10px 20px;
+   background-color: #ec5252;
+   margin: 20px 0;
+   font-size: 14px;
+   border-radius: 3px;
+   display: inline-block;
+   font-weight: 700;
+}
+.contant_box_404 {
+   margin-top: -10px;
+   text-align: center;
+}

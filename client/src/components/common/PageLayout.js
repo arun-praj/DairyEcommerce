@@ -22,8 +22,9 @@ const PageLayout = (props) => {
 }
 
 const FormContainer = styled.div`
-   width: 360px;
-   margin: 80px auto;
+   max-width: 360px;
+   min-width: 220px;
+   margin: 2% auto;
    /* height: 100vh; */
 `
 

@@ -1,11 +1,15 @@
 import React, { useState } from "react"
 import styled from "styled-components/macro"
 import { Link as ReactRouterLink, Route, useLocation } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from "redux/actions/authAction"
 
 import { Button } from "components/UI/Button"
+import { DropLink, Dropdown, Dropgroup } from "components/UI/Dropdown/Dropdown"
+import ProfilePic from "components/UI/ProfilePic/ProfilePic"
 import Searchbox from "components/layout/Searchbox"
 import Logo from "assets/logo.svg"
+
 const Navigation = styled.nav`
    border-bottom: 1px solid #dcdadb;
    width: 100%;
@@ -83,9 +87,13 @@ const DividerLine = styled.div`
    margin: 0 8px;
 `
 const Nav = ({ clickHandler, history }) => {
+   const dispatch = useDispatch()
    const { userInfo, loading } = useSelector((state) => state.userDetail)
    const { pathname } = useLocation()
    const { showSearchBar } = useState(false)
+   const logoutHandler = () => {
+      dispatch(logout())
+   }
    return (
       <Navigation>
          <NavWrapper>
@@ -132,6 +140,7 @@ const Nav = ({ clickHandler, history }) => {
                   }}
                   isActive={pathname === "/cart"}
                >
+                  {/* <Shop /> */}
                   <svg
                      xmlns='http://www.w3.org/2000/svg'
                      className='icon icon-tabler icon-tabler-shopping-cart'
@@ -154,28 +163,98 @@ const Nav = ({ clickHandler, history }) => {
                {loading ? (
                   <h1>Loading</h1>
                ) : userInfo ? (
-                  <div>{userInfo.firstName}</div>
+                  <Dropdown
+                     to='/profile'
+                     button={
+                        <>
+                           <ProfilePic
+                              firstName={userInfo.firstName}
+                              lastName={userInfo.lastName}
+                           />
+                           {/* <span>{userInfo.firstName}</span> */}
+                        </>
+                     }
+                  >
+                     <Dropgroup>
+                        <Link className='dropdown__link' to='/profile'>
+                           <div style={{ display: "flex" }}>
+                              <div
+                                 style={{
+                                    marginRight: "14px",
+                                 }}
+                              >
+                                 <ProfilePic
+                                    firstName={userInfo.firstName}
+                                    lastName={userInfo.lastName}
+                                 />
+                              </div>
+                              <div
+                                 style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                 }}
+                              >
+                                 <span
+                                    style={{
+                                       fontSize: "16px",
+                                       fontWeight: "700",
+                                    }}
+                                 >
+                                    {`${userInfo.firstName} ${userInfo.lastName}`}
+                                 </span>
+                                 <span
+                                    style={{
+                                       fontSize: "12px",
+                                       fontWeight: "500",
+                                       color: "#73726c",
+                                    }}
+                                 >
+                                    {userInfo.email}
+                                 </span>
+                              </div>
+                           </div>
+                        </Link>
+                     </Dropgroup>
+                     <Dropgroup>
+                        <DropLink value='My profile' to='/profile' />
+                        <DropLink
+                           value='Purchase History'
+                           to='/purchase-history'
+                        />
+                     </Dropgroup>
+                     <Dropgroup>
+                        <DropLink value='My cart' to='/cart' />
+                     </Dropgroup>
+
+                     <Dropgroup>
+                        <DropLink
+                           onClick={logoutHandler}
+                           value=' Log out'
+                           to='/'
+                        />
+                     </Dropgroup>
+                  </Dropdown>
                ) : (
+                  // <div>{userInfo.firstName}</div>
                   <>
-                     <Button to='/login' type='primary'>
-                        <Link
-                           style={{
-                              textDecoration: "none",
-                              color: "white",
-                           }}
-                           to='/login'
-                        >
+                     <Link
+                        style={{
+                           textDecoration: "none",
+                           color: "white",
+                        }}
+                        to='/login'
+                     >
+                        <Button to='/login' type='primary'>
                            Log in
-                        </Link>
-                     </Button>
-                     <Button>
-                        <Link
-                           style={{ textDecoration: "none", color: "#29303b" }}
-                           to='/login'
-                        >
-                           Sign up
-                        </Link>
-                     </Button>
+                        </Button>
+                     </Link>
+                     <Link
+                        style={{ textDecoration: "none", color: "#29303b" }}
+                        to='/register'
+                     >
+                        <Button>Sign up</Button>
+                     </Link>
                   </>
                )}
             </Menu>

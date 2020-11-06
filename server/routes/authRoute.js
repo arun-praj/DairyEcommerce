@@ -61,6 +61,40 @@ router.post(
    })
 )
 
+//@description      Update user
+//@Routes           PUT /api/auth/profile
+//@access           private
+router.put(
+   "/profile",
+   protectUser,
+
+   asyncHandler(async (req, res, next) => {
+      const user = await User.findById(req.userId)
+      if (user) {
+         user.firstName = req.body.firstName || user.firstName
+         user.lastName = req.body.lastName || user.lastName
+         user.contact = req.body.contact || user.contact
+
+         if (req.body.password) {
+            user.password = req.body.password
+         }
+      }
+      const updatedUser = await user.save()
+      if (updatedUser) {
+         return res
+            .json({
+               message: "Success",
+               data: {
+                  user: updatedUser,
+                  token: generateToken(updatedUser._id),
+               },
+            })
+            .status(201)
+      }
+      throw new Error("User cannot be created")
+   })
+)
+
 //@description      Get user profile
 //@Routes           GET /api/auth/me
 //@access           private

@@ -40,6 +40,10 @@ const authSchema = mongoose.Schema(
          minlength: 6,
          select: false, // When we get a user its not gonna return password
       },
+      subscribeToNews: {
+         type: Boolean,
+         default: false,
+      },
       points: {
          type: [Number],
       },

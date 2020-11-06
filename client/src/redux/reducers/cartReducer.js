@@ -7,7 +7,7 @@ const cartState = {
 }
 
 export const cartReducer = (state = cartState, action) => {
-   const { payload, type } = action
+   const { payload, type, qty } = action
 
    switch (type) {
       case CART_ADD_ITEM:
@@ -17,6 +17,7 @@ export const cartReducer = (state = cartState, action) => {
             return {
                ...state,
                loading: false,
+               cart: state.cart.map((x) => (x._id === exist._id ? payload : x)),
             }
          } else {
             return {

@@ -1,0 +1,33 @@
+.button {
+   // position: relative;
+   // display: inline-block;
+   padding: 5px 16px;
+   font-size: 14px;
+   font-weight: 500;
+   line-height: 20px;
+   white-space: nowrap;
+   vertical-align: middle;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   border: 1px solid;
+   border-radius: 6px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   background-color: #fafbfc;
+   border-color: rgba(27, 31, 35, 0.15);
+   box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04), inset 0 1px 0 hsla(0, 0%, 100%, 0.25);
+   &--danger {
+      color: #cb2431;
+      transition: none;
+      &:hover {
+         color: #fff;
+         background-color: #cb2431;
+         border-color: rgba(27, 31, 35, 0.15);
+         box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1), inset 0 1px 0 hsla(0, 0%, 100%, 0.03);
+      }
+   }
+}
