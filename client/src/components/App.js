@@ -10,6 +10,7 @@ import Nav from "components/layout/Nav"
 import SideDrawer from "components/layout/SideDrawer/SideDrawer"
 import Backdrop from "components/layout/Backdrop"
 
+import Esewaplayground from "./esewaplayground"
 //scss
 import "sass/index.scss"
 const GlobalStyle = createGlobalStyle`
@@ -52,7 +53,8 @@ const theme = {
    fontColorDark: "#29303b",
    fontColorLight: "#d1d3dc",
    cardBorder: "solid 1px #dcdacb",
-   cardShadow: "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
+   cardShadow:
+      "0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1)",
    btnPrimaryColor: "#ec5252",
 }
 
@@ -69,11 +71,12 @@ const App = () => {
 
    return (
       <ThemeProvider theme={theme}>
-         <GlobalStyle />
+         <Esewaplayground />
+         {/* <GlobalStyle />
          <Nav clickHandler={sideDrawerHandler} />
          <SideDrawer clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
          <Backdrop clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
-         <Routes />
+         <Routes /> */}
       </ThemeProvider>
    )
 }

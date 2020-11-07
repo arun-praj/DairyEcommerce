@@ -60,4 +60,23 @@ router.post(
       }
    })
 )
+
+//@description      Get order by Id
+//@Routes           get /api/order/:id
+//@access           private
+router.get(
+   "/:id",
+   protectUser,
+   asyncHandler(async (req, res) => {
+      const order = await Order.findById(req.params.id).populate("user", "name,email")
+      if (order) {
+         res.json({
+            data: order,
+         })
+      } else {
+         res.status(404)
+         throw new Error("Order not found")
+      }
+   })
+)
 export default router
