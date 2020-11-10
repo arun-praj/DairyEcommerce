@@ -21,8 +21,8 @@ router.post(
          return res
             .json({
                message: "Auth Success",
+               token: generateToken(user._id),
                data: {
-                  token: generateToken(user._id),
                   user,
                },
             })

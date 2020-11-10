@@ -11,13 +11,29 @@ import {
 } from "./types"
 import axios from "axios"
 
-export const addReview = (id) => async (dispatch) => {
+export const addReview = (id, rating, comment) => async (dispatch) => {
    try {
       dispatch({
          type: REVIEW_ADD_REQUEST,
       })
+      const config = {
+         headers: {
+            "Content-Type": "application/json",
+         },
+      }
 
-      const res = await axios.get(`/api/products/${id}/reviews`)
+      const token = localStorage.getItem("token")
+      if (token) {
+         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+      } else {
+         delete axios.defaults.headers.common["Authorization"]
+      }
+      const body = JSON.stringify({
+         rating,
+         comment,
+      })
+
+      const res = await axios.post(`/api/products/${id}/reviews`, body, config)
       dispatch({
          type: REVIEW_ADD_SUCCESS,
          payload: res.data.message,
@@ -33,7 +49,9 @@ export const addReview = (id) => async (dispatch) => {
    }
 }
 
-export const listProducts = (keyword = "") => async (dispatch) => {
+export const listProducts = (keyword = "", category = "") => async (
+   dispatch
+) => {
    try {
       dispatch({
          type: PRODUCT_LIST_REQUEST,
@@ -41,7 +59,9 @@ export const listProducts = (keyword = "") => async (dispatch) => {
 
       const {
          data: { data },
-      } = await axios.get(`/api/products?keyword=${keyword}`)
+      } = await axios.get(
+         `/api/products?keyword=${keyword}&category=${category}`
+      )
       dispatch({
          type: PRODUCT_LIST_SUCCESS,
          payload: data,
@@ -72,10 +92,11 @@ export const listProductDetails = (productId) => async (dispatch) => {
       console.log(e)
       dispatch({
          type: PRODUCT_DETAIL_FAILED,
-         payload:
-            e.message && e.response.data.message
-               ? e.response.data.message
-               : "Server didnt response",
+         payload: "Error",
+         // payload:
+         //    e.message && e.response.data.message
+         //       ? e.response.data.message
+         //       : "Server didnt response",
       })
    }
 }

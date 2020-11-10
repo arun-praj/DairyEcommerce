@@ -1,0 +1,126 @@
+.section-footer {
+   width: 100%;
+   border-top: 1px solid #dcdacb;
+   // margin-top: 25rem;
+   //  display: flex;
+   //  align-items: center;
+}
+.footer-container {
+   min-height: 250px;
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   max-width: 1200px;
+   margin: 0 auto;
+   //    font-family: "Poppins", sans-serif;
+   padding: 40px 5px;
+   flex-wrap: wrap;
+
+   .grid {
+      ul {
+         font-size: 13px;
+         li {
+            // line-height: 1.8rem;
+            padding: 3px;
+            letter-spacing: 0;
+            color: #007791;
+         }
+         a {
+            color: #007791;
+            &:hover {
+               border-bottom: 1px solid #007791;
+            }
+         }
+      }
+   }
+}
+.footer-form {
+   width: 100%;
+   display: flex;
+   & > * {
+      outline: none;
+   }
+}
+.footer-input {
+   padding: 10px 13.5px;
+   font-size: 14px;
+   border: var(--card-border);
+   &::-webkit-input-placeholder {
+      color: #3b3b3b85;
+   }
+}
+.footer-btn {
+   padding: 10px 13.5px;
+   background-color: var(--primary-color);
+   //  height: 100%;
+   color: #fff;
+   font-weight: 700;
+   border: none;
+   border-radius: 0;
+
+   &:hover {
+      cursor: pointer;
+   }
+}
+.footer-icon {
+   height: 30px;
+   fill: #007791;
+   width: 30px;
+   margin-right: 2.5px;
+   &--gmail {
+      height: 20px;
+      width: 20px;
+   }
+   &--flag {
+      height: 20px;
+      width: 20px;
+   }
+   //  &--facebook {
+   //       fill: #3b5998;
+   //  }
+   //  &--google {
+   //       fill: #db4a39;
+   //  }
+   //  &--twitter {
+   //       fill: #1da1f2;
+   //  }
+}
+.copyrights {
+   width: 100%;
+   border-top: 1px solid #dcdacb;
+   padding: 7.5px 5px 15px 5px;
+   color: var(--font-color);
+   &-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 10px 5px;
+      letter-spacing: 0.2;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+   }
+   .grid-1 {
+      display: flex;
+      width: 70%;
+      justify-content: space-between;
+      color: #949baf;
+   }
+   a {
+      //   color: red;
+      font-weight: 500;
+      padding: 2px 12.5px;
+      color: inherit;
+      &:hover {
+         padding: 0.2px 12.5px;
+         border-bottom: 1px solid #dcdacb;
+      }
+      &:not(:last-child) {
+         border-right: 1px solid #dcdacb;
+      }
+   }
+}
+.contact-row {
+   display: flex;
+   // justify-content: center;
+   align-items: center;
+}

@@ -70,7 +70,7 @@ export const productDetailReducer = (state = productDetailState, action) => {
    }
 }
 
-const reviewAddReducer = (state = {}, action) => {
+export const reviewAddReducer = (state = {}, action) => {
    const { type, payload } = action
    switch (type) {
       case REVIEW_ADD_REQUEST:

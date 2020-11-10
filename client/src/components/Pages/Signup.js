@@ -147,6 +147,11 @@ const Signup = () => {
                         value={subscribe}
                         id='squaredCheckbox'
                         name='subscribe'
+                        style={{
+                           padding: "0",
+                           margin: "0",
+                           width: "20px",
+                        }}
                         onChange={() => handleSubscribe(!subscribe)}
                      />
                      <label

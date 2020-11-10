@@ -4,14 +4,14 @@ import { Switch, Route } from "react-router-dom"
 import Login from "components/Pages/Login"
 import Signup from "components/Pages/Signup"
 
-import Home from "components/Pages/Home"
+import Home from "components/Pages/Home/Home"
 import Cart from "components/Pages/Cart/Cart"
 import Error from "components/Pages/Error/Error"
 import UserProfile from "components/Pages/UserProfile/UserProfile"
-import ProductDetails from "components/Pages/ProductDetails"
+import ProductDetails from "components/Pages/ProductDetails/ProductDetails"
 import Shipping from "components/Pages/Shipping/Shipping"
 import Order from "components/Pages/order/Order"
-
+import Category from "components/Pages/Category/Category"
 const Routes = () => {
    return (
       <Switch>
@@ -32,6 +32,7 @@ const Routes = () => {
          <Route exact path='/search/:keyword' component={Home} />
          <Route exact path='/shipping' component={Shipping} />
          <Route exact path='/order/complete' component={Order} />
+         <Route exact path='/categories' component={Category} />
 
          <Route exact path='/' component={Home} />
 

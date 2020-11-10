@@ -20,8 +20,12 @@ router.get(
               },
            }
          : {}
-
-      const products = await Product.find({ ...keyword })
+      const category = req.query.category
+         ? {
+              category: req.query.category,
+           }
+         : {}
+      const products = await Product.find({ ...keyword, ...category })
 
       if (products.length > 0) {
          return res
@@ -84,6 +88,8 @@ router.post(
             runValidators: true,
          }
       )
+      console.log(product)
+
       if (!product) {
          return res
             .json({
@@ -121,7 +127,11 @@ router.post(
          )
          if (alreadyReviewed) {
             res.status(400)
-            throw new Error("You have already reviewed this product")
+            res.json({
+               message: "You have already reviewed this product",
+               alreadyExist: true,
+            })
+            // throw new Error()
          }
          const userLogedin = await User.findById(req.userId)
          // console.log(userLogedin)

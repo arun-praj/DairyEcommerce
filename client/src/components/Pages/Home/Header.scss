@@ -1,0 +1,217 @@
+.carousel {
+   max-width: 1200px;
+   // text-align: center;
+   // margin: auto;
+   height: 366px;
+   z-index: -1;
+   margin: auto auto 15px auto;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   max-width: 100vw;
+   position: relative;
+   z-index: 0;
+   margin-bottom: 40px;
+   background-image: linear-gradient(
+         90deg,
+         rgba(73, 73, 73, 0.267),
+         rgba(199, 199, 199, 0.26)
+      ),
+      url("../../../assets/banners/bg-img-3.jpg");
+   .board {
+      background-color: #fff;
+      max-width: 440px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #dcdacb;
+      position: absolute;
+      transform: translateY(-50%);
+      padding: 24px;
+      line-height: 1.15;
+      z-index: 9999;
+      &-1 {
+         left: 48px;
+         top: 50%;
+      }
+      &-2 {
+         right: 48px;
+         top: 50%;
+      }
+   }
+   &_form {
+      // width: 100%;
+      flex: 1 1 100%;
+      display: flex;
+   }
+   &_input {
+      flex: 0 0 70%;
+      outline: none;
+      font-size: 14.5;
+      padding: 12px 10px;
+      font-family: inherit;
+      color: var(--font-color-secondary-sub);
+   }
+   &_btn {
+      outline: none;
+      //   height: 10px;
+      background-color: var(--primary-color);
+      padding: 10px 20px;
+      text-align: center;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 0px;
+      &:hover {
+         cursor: pointer;
+      }
+   }
+}
+
+.section-testimonial {
+   // width: 100vw;
+   // min-height: 35rem;
+   // background-color: #f7f7f7;
+}
+
+.testimonials {
+   //  padding-bottom: 2.2em;
+   text-align: center;
+   color: #666;
+   max-width: 120rem;
+   padding: 5rem 0;
+   // display: flex;
+   // flex-direction: column;
+   // justify-content: space-between;
+   // align-items: center;
+   border-top: 1px solid #dcdacb;
+   margin: 7rem auto 0 auto;
+}
+.test-body {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   .item {
+      max-width: 30rem;
+      border: 1px solid #dcdacb;
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: 0 0 5px 1px rgba(20, 23, 28, 0.1),
+         0 3px 1px 0 rgba(20, 23, 28, 0.1);
+      padding: 3rem 1rem;
+      p {
+         text-align: justify;
+         font-size: 1.3rem;
+      }
+   }
+}
+// .testimonials h1{
+//     color: #222;
+//     font-size: 1.3em;
+// }
+.testimonials .test-body {
+   padding: 1em;
+}
+.testimonials .item {
+   text-align: center;
+   // padding: 1em 0;
+}
+.testimonials img {
+   width: 4.8em;
+   height: 4.8em;
+   border-radius: 50%;
+   opacity: 0.75;
+}
+.testimonials .name {
+   color: #007791;
+   font-weight: 700;
+   font-size: 1.3rem;
+}
+.testimonials .desig {
+   font-size: 0.7em;
+   font-weight: 300;
+   // padding: 0.5em 0;
+   font-size: 1.3rem;
+
+   color: #007791;
+}
+.testimonials .share {
+   margin: 0 auto;
+   width: 5em;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: justify;
+   -ms-flex-pack: justify;
+   justify-content: space-between;
+}
+.testimonials i {
+   color: #bfbfbf;
+   padding: 0.5em 0;
+   -webkit-transition: all 0.5s;
+   -o-transition: all 0.5s;
+   transition: all 0.5s;
+   cursor: pointer;
+}
+.testimonials i:hover {
+   color: blue;
+}
+.testimonials p {
+   // max-width: 27em;
+   // margin: 0 auto;
+   font-size: 0.8em;
+}
+.testimonials button {
+   font-size: 1em;
+   border: none;
+
+   border-bottom: 3px solid #007791;
+   //  background-color: #fafafa;
+   color: #333;
+   padding: 0.8em 2em;
+   cursor: pointer;
+   -webkit-transition: all 0.2s;
+   -o-transition: all 0.2s;
+   transition: all 0.2s;
+}
+.testimonials button:hover {
+   background-color: #fafafa;
+   transform: scale(1.05);
+}
+.testimonial__icon {
+   height: 2rem;
+   width: 2rem;
+   fill: #ed7562;
+}
+
+@media (min-width: 38.4rem) {
+   .testimonials {
+      font-size: 1.2em;
+   }
+   .testimonials .test-body {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+   }
+   .testimonials p {
+      text-align: left;
+      padding: 1em;
+   }
+}
+
+@media screen and (max-width: 767px) {
+   .carousel {
+      height: 200px;
+   }
+   .carousel .board {
+      display: none;
+   }
+}
+@media screen and (max-width: 768px) {
+   .test-body {
+      display: flex;
+      flex-direction: column;
+      // gap: 16px;/
+      .item {
+         margin-top: 16px;
+      }
+   }
+}

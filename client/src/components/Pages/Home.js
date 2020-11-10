@@ -20,25 +20,28 @@ const Home = ({ match }) => {
    }, [dispatch, searchedKeyword])
 
    return (
-      <PageLayout>
-         <CardContainer>
-            {loading ? (
-               // <><>
-               <Spinner position='center' />
-            ) : error ? (
-               <h1>{error}</h1>
-            ) : (
-               products &&
-               products.map((p) => {
-                  return (
-                     <Card key={p._id} to={`product/${p._id}`}>
-                        {p.name}
-                     </Card>
-                  )
-               })
-            )}
-         </CardContainer>
-      </PageLayout>
+      <>
+         <PageLayout>
+            <CardContainer>
+               {loading ? (
+                  // <><>
+                  <Spinner position='center' />
+               ) : error ? (
+                  <h1>{error}</h1>
+               ) : (
+                  products &&
+                  products.map((p) => {
+                     return (
+                        <Card key={p._id} to={`product/${p._id}`}>
+                           {p.name}
+                        </Card>
+                     )
+                  })
+               )}
+            </CardContainer>
+         </PageLayout>
+         {/* <Footer /> */}
+      </>
    )
 }
 
