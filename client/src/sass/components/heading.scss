@@ -79,3 +79,14 @@ input:disabled {
    opacity: 0.7;
    cursor: no-drop;
 }
+.productdetail__select {
+   width: 50%;
+   margin-bottom: 10px;
+   padding: 0px 8px 10px 8px;
+   opacity: 0.7;
+}
+@media screen and (max-width: 768px) {
+   .productdetail__select {
+      width: 100% !important;
+   }
+}

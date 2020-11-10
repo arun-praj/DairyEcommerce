@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const connect = async () => {
    try {
@@ -6,12 +6,12 @@ const connect = async () => {
          useUnifiedTopology: true,
          useNewUrlParser: true,
          useCreateIndex: true,
-         useFindAndModify: true,
-      });
-      console.log(`Database connected : ${conn.connection.host}`);
+         useFindAndModify: false,
+      })
+      console.log(`Database connected : ${conn.connection.host}`)
    } catch (e) {
-      console.log(`Database disconnected : ${e}`);
+      console.log(`Database disconnected : ${e}`)
    }
-};
+}
 
-export default connect;
+export default connect

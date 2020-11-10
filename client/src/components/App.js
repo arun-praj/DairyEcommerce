@@ -10,7 +10,7 @@ import Nav from "components/layout/Nav"
 import SideDrawer from "components/layout/SideDrawer/SideDrawer"
 import Backdrop from "components/layout/Backdrop"
 
-import Esewaplayground from "./esewaplayground"
+// import Esewaplayground from "./esewaplayground"
 //scss
 import "sass/index.scss"
 const GlobalStyle = createGlobalStyle`
@@ -71,12 +71,18 @@ const App = () => {
 
    return (
       <ThemeProvider theme={theme}>
-         <Esewaplayground />
-         {/* <GlobalStyle />
+         {/* <Esewaplayground /> */}
+         <GlobalStyle />
          <Nav clickHandler={sideDrawerHandler} />
-         <SideDrawer clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
-         <Backdrop clickHandler={sideDrawerHandler} isSideDrawerOpen={isSideDrawerOpen} />
-         <Routes /> */}
+         <SideDrawer
+            clickHandler={sideDrawerHandler}
+            isSideDrawerOpen={isSideDrawerOpen}
+         />
+         <Backdrop
+            clickHandler={sideDrawerHandler}
+            isSideDrawerOpen={isSideDrawerOpen}
+         />
+         <Routes />
       </ThemeProvider>
    )
 }

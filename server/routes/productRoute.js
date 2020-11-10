@@ -3,6 +3,8 @@ const router = express.Router()
 import asyncHandler from "express-async-handler"
 
 import Product from "../models/ProductModel.js"
+import User from "../models/UserModel.js"
+import protectUser from "../middlewares/authMiddleware.js"
 
 //@description      Get all products
 //@Routes           GET /api/products/
@@ -103,4 +105,48 @@ router.post(
       }).status(201)
    })
 )
+
+//@description      Create new review
+//@Routes           POST /api/products/:id/reviews
+//@access           private
+router.post(
+   "/:id/reviews",
+   protectUser,
+   asyncHandler(async (req, res) => {
+      const { rating, comment } = req.body
+      const product = await Product.findById(req.params.id)
+      if (product) {
+         const alreadyReviewed = product.reviews.find(
+            (r) => r.user.toString() === req.userId.toString()
+         )
+         if (alreadyReviewed) {
+            res.status(400)
+            throw new Error("You have already reviewed this product")
+         }
+         const userLogedin = await User.findById(req.userId)
+         // console.log(userLogedin)
+         const review = {
+            firstName: userLogedin.firstName,
+            lastName: userLogedin.lastName,
+            user: req.userId,
+            rating: Number(rating),
+            comment,
+         }
+         console.log(review)
+         product.reviews.push(review)
+         product.numReviews = product.reviews.length
+         product.rating =
+            product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+            product.reviews.length
+         await product.save()
+         res.json({ message: "Reviews Added" }).status(201)
+      }
+
+      res.json({
+         data: product.value,
+         message: "Added to database",
+      }).status(201)
+   })
+)
+
 export default router

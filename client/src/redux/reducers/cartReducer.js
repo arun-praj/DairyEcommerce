@@ -33,6 +33,13 @@ export const cartReducer = (state = cartState, action) => {
             loading: false,
             cart: state.cart.filter((x) => x._id !== payload),
          }
+      case "CART_RESET":
+         localStorage.removeItem("cart")
+         return {
+            ...state,
+            cart: [],
+         }
+
       default:
          return state
    }

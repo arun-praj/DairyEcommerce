@@ -59,9 +59,12 @@
 
          width: 100%;
          border: 1px solid #dcdadb;
+         padding: 0 16px;
          border-top: none;
          // padding: 12px;
          min-height: 30vh;
+         display: flex;
+         justify-content: center;
       }
    }
 }

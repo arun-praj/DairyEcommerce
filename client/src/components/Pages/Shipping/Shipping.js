@@ -5,15 +5,22 @@ import { PageLayout } from "components/common"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { Button } from "components/UI/Button"
-import "./Shipping.scss"
+
 import { address } from "data/address"
 import { createOrder } from "redux/actions/orderAction"
 import { usePromiseTracker } from "react-promise-tracker"
+// import DayPicker from "react-day-picker"
+import DayPickerInput from "react-day-picker/DayPickerInput"
+import "react-day-picker/lib/style.css"
+import dayPickerStyles from "./Daypicker.module.scss"
+import "./Shipping.scss"
+// import DatePicker from "react-datepicker"
+// import "react-datepicker/dist/react-datepicker.css"
 import Spinner from "components/UI/Spinner/Spinner"
 const Shipping = ({ history }) => {
    const dispatch = useDispatch()
    const { promiseInProgress } = usePromiseTracker()
-
+   const [deliveryDate, setDeliveryDate] = useState(new Date())
    const [region, setRegion] = useState("Bagmati")
    const [city, setCity] = useState("bhaktapur")
    const [area, setArea] = useState("")
@@ -23,18 +30,14 @@ const Shipping = ({ history }) => {
    const [deliveryCost, setDeliveryCost] = useState(0)
    const { cart } = useSelector((state) => state.cart)
    const { isAuth, loading } = useSelector((state) => state.userDetail)
-   const { error: orderError, success, order } = useSelector((state) => {
+   const { error: orderError } = useSelector((state) => {
       return state.orders
    })
-   console.log(orderError)
+
    const addDecimal = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2)
    }
-   useEffect(() => {
-      if (success) {
-         history.push(`order/${order._id}`)
-      }
-   }, [success])
+
    useEffect(() => {
       const a = address
          .find((add) => {
@@ -63,13 +66,29 @@ const Shipping = ({ history }) => {
       return acc + item.price * item.qty
    }, 0)
    const couponPrice = originalPrice > 1999 ? 100 : 0
+
    const deliveryPrice = originalPrice > 1999 ? 0 : deliveryCost
+
    const onSubmit = () => {
       if (area.length < 1 || city.length < 1 || region.length < 1) {
          setError("Please fill out Address form")
       } else {
          setError("")
-         dispatch(createOrder(cart, region, city, area, paymentRadio, originalPrice))
+         dispatch(
+            createOrder(
+               cart,
+               region,
+               city,
+               area,
+               paymentRadio,
+               originalPrice,
+               deliveryDate
+            )
+         )
+         dispatch({
+            type: "CART_RESET",
+         })
+         history.push(`order/complete`)
       }
    }
    return (
@@ -109,7 +128,7 @@ const Shipping = ({ history }) => {
                         <select
                            name=''
                            id='region'
-                           className='select_form '
+                           className='select_form'
                            onChange={(e) => {
                               setRegion(e.target.value)
                            }}
@@ -118,7 +137,11 @@ const Shipping = ({ history }) => {
                               Regions
                            </option>
                            {address.map((add) => {
-                              return <option value={add.region}>{add.region}</option>
+                              return (
+                                 <option value={add.region}>
+                                    {add.region}
+                                 </option>
+                              )
                            })}
                         </select>
                         <label htmlFor='region' className='select_label'>
@@ -146,7 +169,10 @@ const Shipping = ({ history }) => {
                                  })
                                  .cities.map((city) => {
                                     return (
-                                       <option key={city.name} value={city.name}>
+                                       <option
+                                          key={city.name}
+                                          value={city.name}
+                                       >
                                           {city.name}
                                        </option>
                                     )
@@ -182,7 +208,10 @@ const Shipping = ({ history }) => {
                         </label>
                      </div>
                   </div>
-                  <div className='container_payment'>
+                  <div
+                     className='container_payment'
+                     style={{ marginBottom: "32px" }}
+                  >
                      <h4
                         style={{
                            fontSize: "24px",
@@ -191,18 +220,90 @@ const Shipping = ({ history }) => {
                            marginTop: "16px",
                         }}
                      >
+                        Pick a date
+                     </h4>
+                     <DayPickerInput
+                        // inputProps={{ width: "300px" }}
+                        classNames={dayPickerStyles}
+                        onDayChange={(day) => setDeliveryDate(day)}
+                     />
+
+                     {/* <DatePicker
+                        style={{ padding: "20px" }}
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                     /> */}
+                  </div>
+
+                  {/* FXAvtrCZpaDWnJcficC */}
+                  <div className='container_payment'>
+                     <h4
+                        style={{
+                           fontSize: "24px",
+                           fontWeight: "500",
+                           padding: "0 0 8px",
+                           marginTop: "16px",
+                           width: "200px",
+                        }}
+                     >
                         Payment Methods
                      </h4>
-                     <li>
-                        <input id='r1' type='radio' name='radio' value='Cash on delivery' className='radio' />
-                        <label htmlFor='r1' className='radio_label' onClick={() => setPaymentRadio("Cash on delivery")}>
+                     <li
+                        style={{
+                           width: "200px",
+                           display: "flex",
+                           alignItems: "center",
+                           padding: "0",
+                           margin: "8px 0 16px 0",
+                        }}
+                     >
+                        <input
+                           id='r1'
+                           type='radio'
+                           name='radio'
+                           value='Cash on delivery'
+                           className='radio'
+                           checked
+                           style={{
+                              margin: 0,
+                              padding: 0,
+                              width: "25px",
+                           }}
+                        />
+                        <label
+                           htmlFor='r1'
+                           className='radio_label'
+                           onClick={() => setPaymentRadio("Cash on delivery")}
+                        >
                            Cash on delivery
                         </label>
                      </li>
-                     <li>
-                        <input id='r2' type='radio' name='radio' className='radio' value='esewa' onClick={() => setPaymentRadio("esewa")} />
+                     <li
+                        style={{
+                           width: "200px",
+                           display: "flex",
+                           alignItems: "center",
+                           padding: "0",
+                           margin: "0",
+                           opacity: "0.7",
+                        }}
+                     >
+                        <input
+                           id='r2'
+                           type='radio'
+                           name='radio'
+                           className='radio'
+                           value='esewa'
+                           disabled
+                           style={{
+                              margin: 0,
+                              padding: 0,
+                              width: "25px",
+                           }}
+                           onClick={() => setPaymentRadio("esewa")}
+                        />
                         <label htmlFor='r2' className='radio_label'>
-                           Esewa
+                           Esewa ( unavailable)
                         </label>
                      </li>
                   </div>
@@ -220,7 +321,8 @@ const Shipping = ({ history }) => {
                               marginTop: "16px",
                            }}
                         >
-                           In order to complete transaction we will transfer you over esewa servers.
+                           In order to complete transaction we will transfer you
+                           over esewa servers.
                         </div>
                      ) : null}
                   </div>
@@ -238,8 +340,21 @@ const Shipping = ({ history }) => {
                      <div>
                         {cart.map((item) => {
                            return (
-                              <div key={item._id} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
-                                 <div style={{ display: "flex", alignItems: "flex-start" }}>
+                              <div
+                                 key={item._id}
+                                 style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "flex-start",
+                                    marginBottom: "16px",
+                                 }}
+                              >
+                                 <div
+                                    style={{
+                                       display: "flex",
+                                       alignItems: "flex-start",
+                                    }}
+                                 >
                                     <img
                                        height='32px'
                                        width='32px'
@@ -339,7 +454,12 @@ const Shipping = ({ history }) => {
                               fontSize: "18px",
                            }}
                         >
-                           Rs.{addDecimal(originalPrice - couponPrice + Number(deliveryCost))}
+                           Rs.
+                           {addDecimal(
+                              originalPrice -
+                                 couponPrice +
+                                 Number(deliveryPrice)
+                           )}
                         </div>
                      </div>
                      <div
@@ -380,7 +500,11 @@ const Shipping = ({ history }) => {
                            </div>
                         )}
                         <Button type='primary' onClick={onSubmit}>
-                           {promiseInProgress ? <Spinner /> : "Complete payment"}
+                           {promiseInProgress ? (
+                              <Spinner />
+                           ) : (
+                              "Complete payment"
+                           )}
                         </Button>
                      </div>
                   </div>

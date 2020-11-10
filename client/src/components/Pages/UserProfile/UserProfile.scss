@@ -96,3 +96,16 @@
       flex: 0 0 50%;
    }
 }
+.order_info {
+   display: flex;
+}
+.cancel_btn {
+   &:hover {
+      cursor: pointer;
+   }
+}
+@media screen and (max-width: 768px) {
+   .order_info {
+      display: block;
+   }
+}

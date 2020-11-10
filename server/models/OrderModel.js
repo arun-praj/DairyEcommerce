@@ -68,7 +68,11 @@ const orderSchema = mongoose.Schema(
             type: String,
          },
       },
-
+      orderStatus: {
+         type: String,
+         enum: ["Processing", "Packed for delivery", "Cancelled", "Delivered"],
+         default: "Processing",
+      },
       shippingPrice: {
          type: Number,
          required: true,
@@ -87,6 +91,10 @@ const orderSchema = mongoose.Schema(
       },
       paidAt: {
          type: Date,
+      },
+      dateToDeliver: {
+         type: Date,
+         default: Date.now(),
       },
       isDelivered: {
          type: Boolean,

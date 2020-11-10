@@ -1,0 +1,43 @@
+.badge {
+   // position: absolute;
+   // top: 15px;
+   //    left: -10px;
+   //    z-index: 9999;
+   // color: #29303b;
+   color: #ffffff;
+   font-size: 9px;
+   width: 80px;
+   background-color: #f4c150;
+   padding: 2px 8px;
+   font-weight: 700;
+   border-radius: 3px;
+   line-height: 1.5;
+   text-align: center;
+   text-transform: uppercase;
+   &__info {
+      background-color: #17a2b8 !important;
+   }
+   &__warning {
+      background-color: #f4c150 !important;
+   }
+   &__danger {
+      background-color: #dc3545 !important;
+   }
+   &__success {
+      background-color: #28a745 !important;
+   }
+   // &::after {
+   //    background: inherit;
+   //    content: "";
+   //    height: 11px;
+   //    position: absolute;
+   //    top: 2px;
+   //    transform: rotate(45deg);
+   //    width: 11px;
+   //    z-index: 1;
+   //    display: block;
+   //    border-radius: 3px;
+   //    right: -4px;
+   //    //   border: #f4c150;
+   // }
+}
