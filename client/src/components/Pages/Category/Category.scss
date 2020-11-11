@@ -12,6 +12,7 @@
 }
 .main__content {
    width: 100%;
+   min-height: 580px;
    border: 1px solid #e5e5e5;
 }
 .category__input {
@@ -27,6 +28,28 @@
    align-items: center;
    padding: 5px 0;
 }
+.nav__category {
+   width: 100%;
+   &--select {
+      width: 100%;
+   }
+}
+
+@media (min-width: 764px) {
+   .nav__category {
+      display: none;
+   }
+   .card__detail {
+      padding: 10px;
+   }
+   .card__description {
+      margin-top: 5px;
+   }
+   .card__price {
+      margin-top: 10px;
+   }
+}
+
 @media (max-width: 765px) {
    .product__container {
       display: flex;
@@ -36,6 +59,6 @@
       border: none;
    }
    .nav__left {
-      width: 100%;
+      display: none;
    }
 }

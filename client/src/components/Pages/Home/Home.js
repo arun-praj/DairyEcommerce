@@ -5,12 +5,11 @@ import { listProducts } from "redux/actions/productsAction"
 import { useDispatch, useSelector } from "react-redux"
 
 import { PageLayout } from "components/common"
-import { Card, CardContainer } from "components/UI"
+import { Card, CardContainer, CardImg } from "components/UI"
 import Spinner from "components/UI/Spinner/Spinner"
 import Rosan from "assets/testimonial/rosan.png"
 import Rodip from "assets/testimonial/rodip.png"
-import Footer from "components/layout/Footer/FooterAccordion"
-
+import Rating from "react-rating"
 import Rabin from "assets/testimonial/rabin.png"
 import "./Header.scss"
 
@@ -52,7 +51,7 @@ const Home = ({ match }) => {
                      marginBottom: "20px",
                   }}
                >
-                  Recently added
+                  Top products
                </h1>
                <CardContainer>
                   {loading ? (
@@ -62,10 +61,68 @@ const Home = ({ match }) => {
                      <h1>{error}</h1>
                   ) : (
                      products &&
-                     products.map((p) => {
+                     products.map((product) => {
                         return (
-                           <Card key={p._id} to={`product/${p._id}`}>
-                              {p.name}
+                           <Card
+                              key={product._id}
+                              to={`product/${product._id}`}
+                           >
+                              <CardImg src='https://images.unsplash.com/photo-1604928905840-36362b12e922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80' />
+                              <div className='card__detail'>
+                                 <div
+                                    style={{
+                                       fontWeight: "700",
+                                    }}
+                                 >
+                                    {product.name}
+                                 </div>
+                                 <div>
+                                    <Rating
+                                       readonly
+                                       initialRating={product.rating / 2}
+                                       fractions='1'
+                                       // placeholderSymbol="✭"
+                                       emptySymbol={
+                                          <p className='bootCamp__detail--rating--star'>
+                                             ☆
+                                          </p>
+                                       }
+                                       fullSymbol={
+                                          <p className='bootCamp__detail--rating--star'>
+                                             ★
+                                          </p>
+                                       }
+                                    />
+                                 </div>
+                                 <div
+                                    className='card__description'
+                                    style={{
+                                       fontSize: "13px",
+                                       opacity: "0.8",
+                                       color: "black",
+                                       textAlign: "justify",
+                                    }}
+                                 >
+                                    {product.description.substring(0, 70)} ...
+                                 </div>
+                                 <div
+                                    className='card__price'
+                                    style={{
+                                       fontSize: "13px",
+                                       opacity: "0.8",
+                                       fontWeight: "700",
+                                       fontSize: "16px",
+                                       color: "#007791",
+                                    }}
+                                 >
+                                    Rs.{product.price}
+                                 </div>
+                              </div>
+                              {/* <img
+                                 src='https://images.unsplash.com/photo-1604928905840-36362b12e922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80'
+                                 alt=''
+                              />
+                           </CardImg> */}
                            </Card>
                         )
                      })
@@ -122,7 +179,6 @@ const Home = ({ match }) => {
                      </div>
                   </div>
                </section>
-               <Footer />
             </div>
          </PageLayout>
       </>

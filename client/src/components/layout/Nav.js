@@ -223,6 +223,12 @@ const Nav = ({ clickHandler, history }) => {
                            to='/purchase-history'
                         />
                      </Dropgroup>
+                     {userInfo.role === "admin" && (
+                        <Dropgroup>
+                           <DropLink value='Admin panel' to='/admin' />
+                        </Dropgroup>
+                     )}
+
                      <Dropgroup>
                         <DropLink value='My cart' to='/cart' />
                      </Dropgroup>

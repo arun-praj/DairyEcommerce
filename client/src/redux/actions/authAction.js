@@ -11,6 +11,8 @@ import {
    USER_UPDATE_FAILED,
    USER_UPDATE_SUCCESS,
    USER_LOGOUT,
+   DELETE_USER_SUCCESS,
+   DELETE_USER_FAILED,
 } from "../actions/types"
 import axios from "axios"
 import { trackPromise } from "react-promise-tracker"
@@ -56,12 +58,16 @@ const register = (formData, subscribe) => async (dispatch) => {
          "Content-Type": "application/json",
       },
    }
-   const firstName =
-      formData.fullName.split(" ")[0].charAt(0).toUpperCase() +
-      formData.fullName.split(" ")[0].slice(1)
-   const lastName =
-      formData.fullName.split(" ")[1].charAt(0).toUpperCase() +
-      formData.fullName.split(" ")[1].slice(1)
+   let firstName, lastName
+   if (formData.fullName.indexOf(" ") > 0) {
+      firstName =
+         formData.fullName.split(" ")[0].charAt(0).toUpperCase() +
+         formData.fullName.split(" ")[0].slice(1)
+
+      lastName =
+         formData.fullName.split(" ")[1].charAt(0).toUpperCase() +
+         formData.fullName.split(" ")[1].slice(1)
+   }
 
    const body = JSON.stringify({
       email: formData.email,
@@ -163,4 +169,29 @@ const logout = () => async (dispatch) => {
    dispatch({ type: USER_LOGOUT })
 }
 
-export { login, loadUser, logout, register, updateUserProfile }
+const deleteUser = (id) => async (dispatch) => {
+   const token = localStorage.getItem("token")
+   if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+   } else {
+      delete axios.defaults.headers.common["Authorization"]
+   }
+   // const config = {
+   //    headers: {
+   //       "Content-Type": "application/json",
+   //    },
+   // }
+   try {
+      const res = await axios.delete(`/api/auth/users/${id}`)
+      console.log(res)
+      dispatch({
+         type: DELETE_USER_SUCCESS,
+      })
+   } catch (e) {
+      dispatch({
+         type: DELETE_USER_FAILED,
+      })
+   }
+}
+
+export { login, loadUser, logout, register, updateUserProfile, deleteUser }

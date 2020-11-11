@@ -12,7 +12,7 @@ const CardContainer = styled.div`
 
 const Card = styled(Link)`
    border: ${(p) => p.theme.cardBorder};
-   padding: 5px;
+   /* padding: 5px; */
    max-width: 216px;
    height: 290px;
    flex: 0 1 calc(100% / 5 - 20px);
@@ -35,7 +35,8 @@ const Card = styled(Link)`
       height: 150px;
       /* margin-top: 10px; */
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      padding: 30px 0 0 0;
       border: none;
       border-top: ${(p) => p.theme.cardBorder};
       //   width: 100%;
@@ -48,6 +49,10 @@ const CardImg = styled.img`
 
    @media screen and (max-width: 480px) {
       max-width: 150px;
+      margin-right: 10px;
+   }
+   @media screen and (max-width: 400px) {
+      max-width: 100px;
       margin-right: 10px;
    }
 `

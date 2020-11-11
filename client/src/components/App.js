@@ -9,6 +9,7 @@ import Routes from "components/Routes"
 import Nav from "components/layout/Nav"
 import SideDrawer from "components/layout/SideDrawer/SideDrawer"
 import Backdrop from "components/layout/Backdrop"
+import Footer from "components/layout/Footer/FooterAccordion"
 
 // import Esewaplayground from "./esewaplayground"
 //scss
@@ -82,7 +83,9 @@ const App = () => {
             clickHandler={sideDrawerHandler}
             isSideDrawerOpen={isSideDrawerOpen}
          />
+
          <Routes />
+         <Footer />
       </ThemeProvider>
    )
 }

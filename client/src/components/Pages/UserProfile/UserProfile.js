@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 
 //redux
-import { updateUserProfile } from "redux/actions/authAction"
+import { updateUserProfile, deleteUser } from "redux/actions/authAction"
 import { getMyOrders, modifyOrderStatus } from "redux/actions/orderAction"
 import { PageHeader, PageLayout } from "components/common"
 import { usePromiseTracker } from "react-promise-tracker"
@@ -14,7 +14,7 @@ import { Button } from "components/UI/Button"
 import Badge from "components/UI/Bagde/Badge"
 import "./react-tabs.scss"
 import "./UserProfile.scss"
-const UserProfile = () => {
+const UserProfile = ({ history }) => {
    const dispatch = useDispatch()
    const { isAuth, userInfo, error, loading } = useSelector(
       (state) => state.userDetail
@@ -74,7 +74,7 @@ const UserProfile = () => {
                               <OrderList />
                            </TabPanel>
                            <TabPanel>
-                              <Setting />
+                              <Setting history={history} />
                            </TabPanel>
                         </Tabs>
                      </div>
@@ -423,9 +423,21 @@ const Form = () => {
    )
 }
 
-const Setting = ({ props }) => {
+const Setting = ({ history }) => {
+   const dispatch = useDispatch()
    const { promiseInProgress } = usePromiseTracker()
+   const { userInfo } = useSelector((state) => state.userDetail)
+   const onDeleteHandler = () => {
+      const comf = window.confirm(
+         "Are you sure? You cant recover your account after you delete"
+      )
 
+      if (comf) {
+         dispatch(deleteUser(userInfo._id))
+         history.push("/")
+      } else {
+      }
+   }
    return (
       <div
          style={{
@@ -468,7 +480,7 @@ const Setting = ({ props }) => {
             <div>
                <button
                   className='button--danger button'
-                  // onClick={() => props.deleteCustomer()}
+                  onClick={onDeleteHandler}
                >
                   {promiseInProgress ? <Spinner /> : "Delete your account"}
                </button>

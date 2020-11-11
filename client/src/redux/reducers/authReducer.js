@@ -11,6 +11,8 @@ import {
    USER_UPDATE_FAILED,
    USER_UPDATE_SUCCESS,
    USER_LOGOUT,
+   DELETE_USER_FAILED,
+   DELETE_USER_SUCCESS,
 } from "../actions/types"
 
 const authState = {
@@ -51,6 +53,7 @@ const authReducer = (state = authState, action) => {
          }
       case USER_LOGIN_FAILED:
       case USER_REGISTER_FAILED:
+      case DELETE_USER_SUCCESS:
          localStorage.removeItem("token")
          return {
             ...state,
@@ -77,6 +80,7 @@ const authReducer = (state = authState, action) => {
             userInfo: payload.user,
          }
       case USER_UPDATE_FAILED:
+      case DELETE_USER_FAILED:
          return {
             ...state,
             loading: false,

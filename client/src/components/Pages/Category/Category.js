@@ -6,6 +6,7 @@ import { listProducts } from "redux/actions/productsAction"
 import { Card, CardContainer, CardImg } from "components/UI"
 import Rating from "react-rating"
 import "./Category.scss"
+import { useLocation } from "react-router-dom"
 
 const CartHeader = styled.div`
    height: 80px;
@@ -25,9 +26,20 @@ const CartHeader = styled.div`
 const CartBody = styled.main`
    padding: 40px 0;
 `
+const useQuery = () => {
+   return new URLSearchParams(useLocation().search)
+}
 const Category = () => {
+   let query = useQuery()
+   console.log(query.get("category"))
+   // console.log(query)
+
    const dispatch = useDispatch()
-   const [selectedCategory, setSelectedCategory] = useState("")
+   // console.log(typeof query)
+   const [selectedCategory, setSelectedCategory] = useState(
+      query.get("category") ? query.get("category") : " "
+   )
+   console.log(selectedCategory)
    const productLists = useSelector((state) => state.productList)
    const { loading, error, products } = productLists
    useEffect(() => {
@@ -96,10 +108,10 @@ const Category = () => {
                         <input
                            className='category__input'
                            type='radio'
-                           value='Cake'
+                           value='cake'
                            id='Cake'
                            name='category'
-                           checked={selectedCategory === "Cake"}
+                           checked={selectedCategory === "cake"}
                            onChange={onCategoryChange}
                         />
                         <label htmlFor='Cake' className='category__label'>
@@ -110,10 +122,10 @@ const Category = () => {
                         <input
                            className='category__input'
                            type='radio'
-                           value='Cheese'
+                           value='cheese'
                            name='category'
                            id='Cheese'
-                           checked={selectedCategory === "Cheese"}
+                           checked={selectedCategory === "cheese"}
                            onChange={onCategoryChange}
                         />
                         <label htmlFor='Cheese' className='category__label'>
@@ -121,6 +133,35 @@ const Category = () => {
                         </label>
                      </div>
                   </div>
+               </div>
+               <div className='nav__category select_container'>
+                  <select
+                     className='nav__category--select select_form'
+                     onChange={onCategoryChange}
+                  >
+                     <option value='' selected={selectedCategory === ""}>
+                        All
+                     </option>
+                     <option
+                        value='curd'
+                        selected={selectedCategory === "curd"}
+                     >
+                        Curd
+                     </option>
+                     <option
+                        value='cake'
+                        selected={selectedCategory === "cake"}
+                     >
+                        Cake
+                     </option>
+                     <option
+                        value='cheese'
+                        selected={selectedCategory === "cheese"}
+                     >
+                        Cheese
+                     </option>
+                  </select>
+                  <label className='select_label'>Filter category</label>
                </div>
                <div className='main__content'>
                   {loading ? (
@@ -135,13 +176,7 @@ const Category = () => {
                               to={`product/${product._id}`}
                            >
                               <CardImg src='https://images.unsplash.com/photo-1604928905840-36362b12e922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80' />
-                              <div
-                                 style={
-                                    {
-                                       // height: "100%",
-                                    }
-                                 }
-                              >
+                              <div className='card__detail'>
                                  <div
                                     style={{
                                        fontWeight: "700",
@@ -168,6 +203,7 @@ const Category = () => {
                                     />
                                  </div>
                                  <div
+                                    className='card__description'
                                     style={{
                                        fontSize: "13px",
                                        opacity: "0.8",
@@ -178,12 +214,14 @@ const Category = () => {
                                     {product.description.substring(0, 70)} ...
                                  </div>
                                  <div
+                                    className='card__price'
                                     style={{
                                        fontSize: "13px",
                                        opacity: "0.8",
                                        fontWeight: "700",
                                        fontSize: "16px",
                                        color: "#007791",
+                                       // marginTop: "10px",
                                     }}
                                  >
                                     Rs.{product.price}

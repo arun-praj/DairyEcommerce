@@ -131,6 +131,11 @@ const ProductDetails = ({ match, history }) => {
                                     <Button
                                        type='secondary'
                                        onClick={addToCartHandler}
+                                       disabled={
+                                          product.countInStock <= 5
+                                             ? true
+                                             : false
+                                       }
                                     >
                                        Add to Cart
                                     </Button>

@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler"
 
 import Product from "../models/ProductModel.js"
 import User from "../models/UserModel.js"
-import protectUser from "../middlewares/authMiddleware.js"
+import { protectUser } from "../middlewares/authMiddleware.js"
 
 //@description      Get all products
 //@Routes           GET /api/products/
@@ -88,7 +88,6 @@ router.post(
             runValidators: true,
          }
       )
-      console.log(product)
 
       if (!product) {
          return res
@@ -112,6 +111,27 @@ router.post(
    })
 )
 
+//@description      Delete product
+//@Routes           POST /api/products/:id
+//@access           private / admin
+
+router.delete(
+   "/:id",
+   asyncHandler(async (req, res) => {
+      const product = await Product.findById(req.params.id)
+
+      if (product) {
+         await product.remove()
+         res.json({
+            message: `${product.name}deleted successfully`,
+         }).status(201)
+      } else {
+         res.status(404)
+         throw new Error("Could not delete product")
+      }
+   })
+)
+
 //@description      Create new review
 //@Routes           POST /api/products/:id/reviews
 //@access           private
@@ -131,7 +151,7 @@ router.post(
                message: "You have already reviewed this product",
                alreadyExist: true,
             })
-            // throw new Error()
+            throw new Error("You have already reviewed this product")
          }
          const userLogedin = await User.findById(req.userId)
          // console.log(userLogedin)

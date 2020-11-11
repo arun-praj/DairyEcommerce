@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler"
 
 import User from "../models/UserModel.js"
 import generateToken from "../utils/generateWebToken.js"
-import protectUser from "../middlewares/authMiddleware.js"
+import { protectUser, admin } from "../middlewares/authMiddleware.js"
 
 //@description      User login and get token
 //@Routes           GET /api/auth/login
@@ -24,6 +24,7 @@ router.post(
                token: generateToken(user._id),
                data: {
                   user,
+                  token: generateToken(user._id),
                },
             })
             .status(200)
@@ -113,6 +114,43 @@ router.get(
       } else {
          res.status(403)
          throw new Error("User not authorized")
+      }
+   })
+)
+
+//@description      Get All users
+//@Routes           GET /api/auth/users
+//@access           private /admin
+router.get(
+   "/users",
+   protectUser,
+   admin,
+   asyncHandler(async (req, res, next) => {
+      // const user = await User.findById(req.userId).select("-password")
+      const users = await User.find({})
+      res.json({
+         data: users,
+      })
+   })
+)
+
+//@description      DELETE USER
+//@Routes           DELETE /api/auth/users
+//@access           private /admin
+router.delete(
+   "/users/:id",
+   protectUser,
+   asyncHandler(async (req, res, next) => {
+      // const user = await User.findById(req.userId).select("-password")
+      const user = await User.findById(req.params.id)
+      if (user) {
+         await user.remove()
+         res.status(200).json({
+            message: "User deleted",
+         })
+      } else {
+         res.status(404)
+         throw new Error("User not found")
       }
    })
 )

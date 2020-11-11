@@ -46,7 +46,7 @@ const Categories = (props) => {
                Choose from one of the category below.
             </h2>
             <div className='topics'>
-               <Link to='/' className='topic-box'>
+               <Link to='/categories?category=curd' className='topic-box'>
                   <img
                      src='./backend/uploads/normal_dhau.jpg'
                      alt=''
@@ -54,7 +54,7 @@ const Categories = (props) => {
                   />
                   Yogurt
                </Link>
-               <Link to='/' className='topic-box'>
+               <Link to='/categories?category=cake' className='topic-box'>
                   <img
                      src='./backend/uploads/red-velvet.jpg'
                      alt=''
@@ -62,7 +62,7 @@ const Categories = (props) => {
                   />
                   Cake
                </Link>
-               <Link to='/' className='topic-box'>
+               <Link to='/categories?category=cheese' className='topic-box'>
                   <img
                      src='./backend/uploads/Nepali-yak-cheese.jpg'
                      alt=''
@@ -75,7 +75,7 @@ const Categories = (props) => {
                   <span className='topic-box-text-sm'>Comming Soon!</span>
                </div>
                <div className='topic-box'>
-                  Butter
+                  Milk
                   <span className='topic-box-text-sm'>Comming Soon!</span>
                </div>
             </div>

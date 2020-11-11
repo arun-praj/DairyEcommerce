@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import asyncHandler from "express-async-handler"
-
+import User from "../models/UserModel.js"
 const protectUser = asyncHandler(async (req, res, next) => {
    if (
       req.headers.authorization &&
@@ -23,4 +23,14 @@ const protectUser = asyncHandler(async (req, res, next) => {
    next()
 })
 
-export default protectUser
+const admin = asyncHandler(async (req, res, next) => {
+   const user = await User.findById(req.userId)
+   if (req.userId && user.role === "admin") {
+      next()
+   } else {
+      res.status(401)
+      throw new Error("Not authorized not admin")
+   }
+})
+
+export { protectUser, admin }

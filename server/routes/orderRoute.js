@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler"
 import express from "express"
 const router = express.Router()
-import protectUser from "../middlewares/authMiddleware.js"
+import { protectUser } from "../middlewares/authMiddleware.js"
 import Order from "../models/OrderModel.js"
 import Product from "../models/ProductModel.js"
 import { address } from "../data/address.js"

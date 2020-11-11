@@ -125,6 +125,22 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
             <div className='sideDrawer__btns'>
                {loading ? <h1>Loading</h1> : isAuth ? authLink : guestLink}
             </div>
+            {userInfo && userInfo.role === "admin" && (
+               <ul className='sideDrawer__list'>
+                  <li
+                     className='sideDrawer__list--item '
+                     onClick={() => clickHandler()}
+                  >
+                     <Link to='/admin' className='sideDrawer__list--link'>
+                        <svg className='sideDrawer__list--icon'>
+                           <use xlinkHref='/icons/tabler-sprite.svg#tabler-adjustments' />
+                        </svg>
+                        <span>Admin</span>
+                     </Link>
+                  </li>
+               </ul>
+            )}
+
             <ul className='sideDrawer__list'>
                <li
                   className='sideDrawer__list--item '
