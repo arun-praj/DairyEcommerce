@@ -12,6 +12,7 @@ import ProductDetails from "components/Pages/ProductDetails/ProductDetails"
 import Shipping from "components/Pages/Shipping/Shipping"
 import Order from "components/Pages/order/Order"
 import Category from "components/Pages/Category/Category"
+import Special from "components/Pages/SpecialOrders/Special"
 // import Admin from "components/admin/Admin"
 
 const Routes = () => {
@@ -35,6 +36,8 @@ const Routes = () => {
          <Route exact path='/shipping' component={Shipping} />
          <Route exact path='/order/complete' component={Order} />
          <Route exact path='/categories' component={Category} />
+         <Route exact path='/special-orders' component={Special} />
+
          {/* <Route exact path='/admin' component={Admin} /> */}
          <Route exact path='/' component={Home} />
 

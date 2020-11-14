@@ -43,16 +43,26 @@ const Card = styled(Link)`
    }
 `
 const CardImg = styled.img`
-   max-width: 100%;
+   /* max-width: 200px; */
+   height: 140px;
+   width: 100%;
+
+   /* height: calc(40% - 20px); */
    object-fit: cover;
-   height: auto;
+   overflow: hidden;
 
    @media screen and (max-width: 480px) {
       max-width: 150px;
+      object-fit: cover;
+
+      height: 100px;
       margin-right: 10px;
    }
    @media screen and (max-width: 400px) {
       max-width: 100px;
+      height: 100px;
+      object-fit: cover;
+
       margin-right: 10px;
    }
 `

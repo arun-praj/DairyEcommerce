@@ -175,7 +175,7 @@ const Category = () => {
                               key={product._id}
                               to={`product/${product._id}`}
                            >
-                              <CardImg src='https://images.unsplash.com/photo-1604928905840-36362b12e922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80' />
+                              <CardImg src={product.image} />
                               <div className='card__detail'>
                                  <div
                                     style={{

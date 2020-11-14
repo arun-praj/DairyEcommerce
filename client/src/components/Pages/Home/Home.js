@@ -12,7 +12,7 @@ import Rodip from "assets/testimonial/rodip.png"
 import Rating from "react-rating"
 import Rabin from "assets/testimonial/rabin.png"
 import "./Header.scss"
-
+// import {} from "../../../assets/products"
 const Home = ({ match }) => {
    const dispatch = useDispatch()
 
@@ -23,6 +23,7 @@ const Home = ({ match }) => {
       dispatch(listProducts(searchedKeyword))
    }, [dispatch, searchedKeyword])
 
+   console.log(process.env.PUBLIC_URL)
    return (
       <>
          <div
@@ -67,7 +68,7 @@ const Home = ({ match }) => {
                               key={product._id}
                               to={`product/${product._id}`}
                            >
-                              <CardImg src='https://images.unsplash.com/photo-1604928905840-36362b12e922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80' />
+                              <CardImg src={product.image} alt='asdf' />
                               <div className='card__detail'>
                                  <div
                                     style={{
