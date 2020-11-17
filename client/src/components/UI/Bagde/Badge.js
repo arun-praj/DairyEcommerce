@@ -19,7 +19,11 @@ const Badge = (props) => {
       default:
          classes = ""
    }
-   return <div className={`badge ${classes}`}>{props.children}</div>
+   return (
+      <div className={`badge ${classes}`} {...props}>
+         {props.children}
+      </div>
+   )
 }
 
 export default Badge

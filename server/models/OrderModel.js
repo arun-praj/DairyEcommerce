@@ -29,6 +29,20 @@ const orderSchema = mongoose.Schema(
                type: Number,
                required: true,
             },
+            decorated: {
+               type: Boolean,
+               default: false,
+            },
+            designSelected: {
+               type: String,
+            },
+            designPrice: {
+               type: Number,
+               default: 0,
+            },
+            nameInDecoration: {
+               type: String,
+            },
          },
       ],
       shippingAddress: {

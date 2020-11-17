@@ -12,7 +12,8 @@ import ProductDetails from "components/Pages/ProductDetails/ProductDetails"
 import Shipping from "components/Pages/Shipping/Shipping"
 import Order from "components/Pages/order/Order"
 import Category from "components/Pages/Category/Category"
-import Special from "components/Pages/SpecialOrders/Special"
+import Special from "components/Pages/Decorate/Decorate"
+import Delivery from "components/Pages/Delivery/Delivery"
 // import Admin from "components/admin/Admin"
 
 const Routes = () => {
@@ -31,12 +32,12 @@ const Routes = () => {
          />
          <Route exact path='/login' component={Login} />
          <Route exact path='/register' component={Signup} />
-
          <Route exact path='/search/:keyword' component={Home} />
          <Route exact path='/shipping' component={Shipping} />
          <Route exact path='/order/complete' component={Order} />
          <Route exact path='/categories' component={Category} />
-         <Route exact path='/special-orders' component={Special} />
+         <Route exact path='/product/decorate/:id' component={Special} />
+         <Route exact path='/delivery' component={Delivery} />
 
          {/* <Route exact path='/admin' component={Admin} /> */}
          <Route exact path='/' component={Home} />

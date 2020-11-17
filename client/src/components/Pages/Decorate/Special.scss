@@ -1,0 +1,26 @@
+.gallery {
+   display: flex;
+   height: 300px;
+   justify-content: space-between;
+   flex-flow: row nowrap;
+   flex-wrap: wrap;
+
+   //    justify-content: space-between;
+   &__box {
+      width: 155px;
+      height: 110px;
+      margin-right: 10px;
+      margin-top: 10px;
+      flex: 1 1 auto;
+      padding: 10px;
+   }
+   //    display: grid;
+   //    grid-template-columns: repeat(auto-fix, minmax(100px, 1fr));
+   //    grid-gap: 10px;
+   //    //    grid-auto-flow: dense;
+   //    padding: 1rem;
+   //    &__box {
+   //       background-color: #ccc;
+   //       min-height: 10px;
+   //    }
+}

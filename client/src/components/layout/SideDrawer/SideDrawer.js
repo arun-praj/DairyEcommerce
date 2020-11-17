@@ -140,7 +140,21 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                   </li>
                </ul>
             )}
-
+            {userInfo && userInfo.role === "delivery" && (
+               <ul className='sideDrawer__list'>
+                  <li
+                     className='sideDrawer__list--item '
+                     onClick={() => clickHandler()}
+                  >
+                     <Link to='/delivery' className='sideDrawer__list--link'>
+                        <svg className='sideDrawer__list--icon'>
+                           <use xlinkHref='/icons/tabler-sprite.svg#tabler-truck' />
+                        </svg>
+                        <span>Delivery</span>
+                     </Link>
+                  </li>
+               </ul>
+            )}
             <ul className='sideDrawer__list'>
                <li
                   className='sideDrawer__list--item '

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-import { useDispatch, useSelector } from "react-redux"
+import { createDispatchHook, useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../../redux/actions/cartAction"
 import { addReview } from "../../../redux/actions/productsAction"
 
@@ -13,6 +13,7 @@ import { Button } from "components/UI"
 import Spinner from "components/UI/Spinner/Spinner"
 import Rating from "react-rating"
 import ProfilePic from "components/UI/ProfilePic/ProfilePic"
+import Badge from "components/UI/Bagde/Badge"
 import "./BootcampDetail.scss"
 
 const StyledLink = styled.span`
@@ -50,6 +51,9 @@ const ProductDetails = ({ match, history }) => {
    const addToCartHandler = () => {
       dispatch(addToCart(match.params.id))
       // history.push(`/cart/${match.params.id}`)
+   }
+   const decorateProductHandler = (id) => {
+      history.push(`decorate/${match.params.id}`)
    }
 
    // if (product) {
@@ -151,6 +155,58 @@ const ProductDetails = ({ match, history }) => {
                                  )}
                               </div>
                            </div>
+                           {product.decorable && (
+                              <div
+                              // style={{
+                              //    position: "relative",
+                              // }}
+                              >
+                                 <Link
+                                    type='primary'
+                                    to={`decorate/${match.params.id}`}
+                                 >
+                                    <Button
+                                       type='primary'
+                                       style={{
+                                          background: "transparent",
+                                          color: "#0f7c90",
+                                          marginTop: "10px",
+                                          border: "1px solid #0f7c90 ",
+                                       }}
+                                       // onClick={decorateProductHandler}
+                                    >
+                                       <svg
+                                          xmlns='http://www.w3.org/2000/svg'
+                                          class='icon icon-tabler icon-tabler-wand'
+                                          width='24'
+                                          height='24'
+                                          viewBox='0 0 24 24'
+                                          stroke-width='1.5'
+                                          stroke='#0f7c90'
+                                          fill='none'
+                                          stroke-linecap='round'
+                                          stroke-linejoin='round'
+                                       >
+                                          <path
+                                             stroke='none'
+                                             d='M0 0h24v24H0z'
+                                             fill='none'
+                                          />
+                                          <polyline points='6 21 21 6 18 3 3 18 6 21' />
+                                          <line x1='15' y1='6' x2='18' y2='9' />
+                                          <path d='M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2' />
+                                          <path d='M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2' />
+                                       </svg>
+                                       &nbsp; &nbsp; Decorate &nbsp; &nbsp;
+                                       <Badge style={{ width: "50px" }}>
+                                          Free
+                                       </Badge>
+                                    </Button>
+                                    <div></div>
+                                 </Link>
+                              </div>
+                           )}
+
                            {/* <svg stroke-width="125" className="bootCamp__detail--icon">
                                     <use xlinkHref="/icons/tabler-sprite.svg#tabler-clock" />
                                  </svg> */}
@@ -311,14 +367,26 @@ const ProductDetails = ({ match, history }) => {
                         product.reviews &&
                         product.reviews.length > 0
                            ? product.reviews.map((review) => {
+                                let d = new Date(review.createdAt)
                                 return (
                                    <div className='review__box review__wrapper'>
                                       <ProfilePic
                                          firstName={review.firstName}
                                          lastName={review.lastName}
                                       />
-                                      <div>
-                                         {review.firstName} {review.lastName}
+                                      <div
+                                         style={{
+                                            marginLeft: "16px",
+                                         }}
+                                      >
+                                         <div
+                                            style={{
+                                               fontSize: "16px",
+                                               fontWeight: "700",
+                                            }}
+                                         >
+                                            {review.firstName} {review.lastName}
+                                         </div>
                                          <div>
                                             <Rating
                                                readonly
@@ -338,8 +406,25 @@ const ProductDetails = ({ match, history }) => {
                                                   </p>
                                                }
                                             />
+                                            <span
+                                               style={{
+                                                  fontSize: "12px",
+                                                  opacity: "0.5",
+                                                  marginLeft: "16px",
+                                               }}
+                                            >
+                                               Reviewed on: {d.toUTCString()}
+                                            </span>
                                          </div>
-                                         <div>{review.comment}</div>
+
+                                         <div
+                                            style={{
+                                               fontSize: "14px",
+                                               opacity: "0.9",
+                                            }}
+                                         >
+                                            {review.comment}
+                                         </div>
                                       </div>
                                    </div>
                                 )

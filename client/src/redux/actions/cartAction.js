@@ -1,9 +1,21 @@
 import axios from "axios"
 import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "./types"
 
-export const addToCart = (productId, qty = 1) => async (dispatch, getState) => {
+export const addToCart = (
+   productId,
+   qty = 1,
+   decorated = false,
+   designSelected = "none",
+   designPrice = 0,
+   nameInDecoration = ""
+) => async (dispatch, getState) => {
    const { data } = await axios.get(`/api/products/${productId}`)
    data.data.qty = qty
+   data.data.decorated = decorated
+   data.data.designPrice = designPrice
+   data.data.designSelected = designSelected
+   data.data.nameInDecoration = nameInDecoration
+
    dispatch({
       type: CART_ADD_ITEM,
       payload: data.data,

@@ -70,12 +70,55 @@ router.post(
       }
    })
 )
+//@description      Get All orders
+//@Routes           get /api/order/delivery
+//@access           private
+router.get(
+   "/delivery/:sort",
+   protectUser,
+   asyncHandler(async (req, res) => {
+      let order = null
+      // console.log(req.params.sort)
+      if (req.params.sort === "today") {
+         const now = new Date()
+         let start = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            1,
+            0,
+            0
+         )
+
+         let end = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1,
+            0,
+            59,
+            59
+         )
+         order = await Order.find({
+            dateToDeliver: { $gte: start, $lt: end },
+         })
+      }
+
+      if (order) {
+         res.json({
+            data: order,
+         })
+      } else {
+         res.status(404)
+         throw new Error("Empty Orders")
+      }
+   })
+)
 
 //@description      Get order by order Id
 //@Routes           get /api/order/:id
 //@access           private
 router.get(
-   "/:id",
+   "/",
    protectUser,
    asyncHandler(async (req, res) => {
       const order = await Order.findById(req.params.id).populate(

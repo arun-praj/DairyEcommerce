@@ -43,7 +43,8 @@ const orderReducer = (state = {}, action) => {
 }
 const initialOrderDetailState = {
    orderItems: [],
-   shippingAddress: {},
+   loading: true,
+   error: null,
 }
 const orderDetailReducer = (state = initialOrderDetailState, action) => {
    const { payload, type } = action
@@ -57,15 +58,14 @@ const orderDetailReducer = (state = initialOrderDetailState, action) => {
          return {
             ...state,
             loading: false,
-            shippingAddress: payload.shippingAddress,
-            orderItems: payload.orderItems,
+            // shippingAddress: payload.shippingAddress,
+            orders: payload,
          }
       case ORDER_DETAILS_FAILED:
          return {
             ...state,
             loading: false,
-            shippingAddress: {},
-            orderItems: [],
+            orders: [],
             error: payload,
          }
       default:

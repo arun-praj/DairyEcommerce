@@ -116,7 +116,7 @@ export const createOrder = (
    }
 }
 
-export const getOrderDetails = (id) => async (dispatch) => {
+export const getOrderDetails = (sort) => async (dispatch) => {
    try {
       dispatch({
          type: ORDER_DETAILS_REQUEST,
@@ -129,7 +129,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
       }
       trackPromise(
          axios
-            .get(`/api/order/${id}`)
+            .get(`/api/order/delivery/${sort}`)
             .then((res) => {
                dispatch({
                   type: ORDER_DETAILS_SUCCESS,
@@ -162,7 +162,6 @@ export const getMyOrders = () => async (dispatch) => {
       dispatch({
          type: MY_ORDER_DETAILS_REQUEST,
       })
-      console.log("abcs")
       const token = localStorage.getItem("token")
       if (token) {
          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
