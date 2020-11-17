@@ -14,7 +14,7 @@ const Delivery = () => {
    console.log(orders)
    return (
       <div>
-         {loading ? (
+         {/* {loading ? (
             <div>Loading</div>
          ) : error ? (
             <div
@@ -182,7 +182,7 @@ const Delivery = () => {
                   ))}
                </PageLayout>
             </>
-         )}
+         )} */}
       </div>
    )
 }
