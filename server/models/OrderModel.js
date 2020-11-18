@@ -102,7 +102,7 @@ const orderSchema = mongoose.Schema(
          ],
          default: "Processing",
       },
-      orderId: {
+      orderFailedReason: {
          type: String,
          default: null,
       },

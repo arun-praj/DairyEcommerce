@@ -241,14 +241,20 @@ router.put(
       let update
       // console.log(req);
       if (req.params.status === "success") {
-         update = await Order.updateOne(req.body.orderId, {
-            orderStatus: "Delivered",
-         })
+         update = await Order.updateOne(
+            { _id: req.body.orderId },
+            {
+               orderStatus: "Delivered",
+            }
+         )
       } else {
-         update = await Order.updateOne(req.body.orderId, {
-            orderStatus: "Failed",
-            orderId: "l",
-         })
+         update = await Order.updateOne(
+            { _id: req.body.orderId },
+            {
+               orderStatus: "Failed",
+               orderFailedReason: "l",
+            }
+         )
       }
       console.log(update)
       // const feedback = await Feedback.create(req.body)

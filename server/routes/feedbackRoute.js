@@ -1,4 +1,4 @@
-import express, { response } from "express"
+import express from "express"
 const router = express.Router()
 import asyncHandler from "express-async-handler"
 
