@@ -103,7 +103,7 @@ const Delivery = () => {
                   {orders.map(
                      (order) =>
                         // order.status
-                        order.orderStatus === "Processing" && (
+                        order.orderStatus === "Packed for delivery" && (
                            <div
                               style={{
                                  width: "100%",
