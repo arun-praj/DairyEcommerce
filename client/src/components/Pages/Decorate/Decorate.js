@@ -98,7 +98,7 @@ const Special = ({ match, history }) => {
                <input
                   name='text'
                   type='text'
-                  placeholder='eg. Happy birthday Arun'
+                  placeholder='eg. Happy birthday Kriti'
                   id='contact'
                   className='select_form'
                   onChange={formDataHandler}

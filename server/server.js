@@ -11,11 +11,15 @@ import cartRoute from "./routes/cartRoutes.js"
 import authRoute from "./routes/authRoute.js"
 import orderRoute from "./routes/orderRoute.js"
 import feedbackRoute from "./routes/feedbackRoute.js"
-
+import mailingRoute from "./routes/mailingRoute.js"
+import uploadRoute from "./routes/uploadRoute.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
 const app = express()
+
 app.use(cors())
+
 dotenv.config({
    path: "./server/config/config.env",
 })
@@ -28,8 +32,13 @@ app.use("/api/cart", cartRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/order", orderRoute)
 app.use("/api/feedback", feedbackRoute)
+app.use("/api/mail", mailingRoute)
+app.use("/api/upload", uploadRoute)
 
-console.log(process.env.NODE_ENV)
+// const __dirname = path.resolve()
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
+
+// console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === "production") {
    app.use(express.static(path.join(__dirname, "../client/build")))
    app.use("*", (req, res) =>

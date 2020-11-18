@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler"
 
 import Product from "../models/ProductModel.js"
 import User from "../models/UserModel.js"
-import { protectUser } from "../middlewares/authMiddleware.js"
+import { protectUser, admin } from "../middlewares/authMiddleware.js"
 
 //@description      Get all products
 //@Routes           GET /api/products/
@@ -112,11 +112,13 @@ router.post(
 )
 
 //@description      Delete product
-//@Routes           POST /api/products/:id
+//@Routes           delete /api/products/:id
 //@access           private / admin
 
 router.delete(
    "/:id",
+   protectUser,
+   admin,
    asyncHandler(async (req, res) => {
       const product = await Product.findById(req.params.id)
 

@@ -19,6 +19,7 @@ const Home = ({ match }) => {
    const searchedKeyword = match.params.keyword
    const productLists = useSelector((state) => state.productList)
    const { loading, error, products } = productLists
+
    useEffect(() => {
       dispatch(listProducts(searchedKeyword))
    }, [dispatch, searchedKeyword])
@@ -144,9 +145,9 @@ const Home = ({ match }) => {
                               class='u-margin-top-small'
                               style={{ textAlign: "center" }}
                            >
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Mollitia omnis earum quae cupiditate fuga
-                              sequi.
+                              "Dude, your stuff is the bomb! It fits our needs
+                              perfectly. I can't say enough about Curd. Curd did
+                              exactly what you said it does"
                            </p>
                         </div>
                         <div class='item'>
@@ -158,9 +159,10 @@ const Home = ({ match }) => {
                               class='u-margin-top-small'
                               style={{ textAlign: "center" }}
                            >
-                              Lorem ipsum dolor sit amet consectetur,
-                              adipisicing elit. Praesentium nisi ipsam laborum
-                              laudantium sint mollitia.
+                              "I would like to personally thank you for your
+                              outstanding product. I am so pleased with this
+                              product. This is simply unbelievable! I can't say
+                              enough about Curd."
                            </p>
                         </div>
                         <div class='item'>
@@ -172,9 +174,8 @@ const Home = ({ match }) => {
                               class='u-margin-top-small'
                               style={{ textAlign: "center" }}
                            >
-                              Lorem ipsum, dolor sit amet consectetur
-                              adipisicing elit. Perferendis eos voluptates,
-                              nulla dolor facilis saepe.
+                              " I will recommend you to my colleagues. I will
+                              refer everyone I know. Really good."
                            </p>
                         </div>
                      </div>

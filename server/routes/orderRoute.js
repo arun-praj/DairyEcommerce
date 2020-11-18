@@ -7,6 +7,32 @@ import Product from "../models/ProductModel.js"
 import User from "../models/UserModel.js"
 import { address } from "../data/address.js"
 
+//@description      Pack for delivery
+//@Routes           POST /api/order
+//@access           private
+router.post(
+   "/changeStatus",
+   protectUser,
+   asyncHandler(async (req, res) => {
+      const order = await Order.findOneAndUpdate(
+         { _id: req.body.id },
+         {
+            sort: {
+               updatedAt: -1,
+            },
+         }
+      )
+      if (order) {
+         res.json({
+            data: order,
+         })
+      } else {
+         res.status(404)
+         throw new Error("Order not found")
+      }
+   })
+)
+
 //@description      add new order
 //@Routes           POST /api/order
 //@access           private
@@ -107,7 +133,7 @@ router.get(
          )
          order = await Order.find({
             dateToDeliver: { $gte: start, $lt: end },
-         })
+         }).sort("orderStatus")
       } else {
          order = await Order.find({})
       }
@@ -236,8 +262,8 @@ router.put(
    "/deliverystatus/:status",
    protectUser,
    asyncHandler(async (req, res) => {
-      console.log(req.params.status)
-      console.log(req.body.orderId)
+      // console.log(req.params.status)
+      // console.log(req.body.orderId)
       let update
       // console.log(req);
       if (req.params.status === "success") {
@@ -247,27 +273,23 @@ router.put(
                orderStatus: "Delivered",
             }
          )
-      } else {
+      } else if (req.params.status === "failed") {
          update = await Order.updateOne(
             { _id: req.body.orderId },
             {
                orderStatus: "Failed",
-               orderFailedReason: "l",
+               orderFailedReason: req.body.orderFailedReason,
+            }
+         )
+      } else if (req.params.status === "Packed for delivery") {
+         update = await Order.updateOne(
+            { _id: req.body.orderId },
+            {
+               orderStatus: "Packed for delivery",
             }
          )
       }
-      console.log(update)
-      // const feedback = await Feedback.create(req.body)
-      // // console.log(req.body)
-      // if (feedback) {
-      //    return res
-      //       .json({
-      //          message: "Success",
-      //       })
-      //       .status(201)
-      // }
-      // res.status()
-      // throw new Error("Error Sending message. Try again")
+
       res.send("lol")
       // req.params.status
    })

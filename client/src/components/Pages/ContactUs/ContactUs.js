@@ -23,7 +23,7 @@ const ContactUs = () => {
          },
       }
       const res = await axios.post(
-         "http://localhost:9000/api/feedback",
+         "https://dairyecommerce.herokuapp.com/api/feedback",
          { name, email, contact, message },
          config
       )

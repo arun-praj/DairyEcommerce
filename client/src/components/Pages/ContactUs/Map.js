@@ -8,7 +8,8 @@ import * as data from "./store_data.json"
 const Maps = () => {
    const [selectedUser, setSelectedUser] = useState(null)
    const Map = ReactMapboxGl({
-      accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+      accessToken:
+         "pk.eyJ1IjoiYXJ1bmtwMTEyMiIsImEiOiJja2NyYjU5YzMwOHM3MzBvZTJzdDAwcHV0In0.QIXyccHR_ZX9umVzA2XUUQ",
       // "pk.eyJ1IjoiYXJ1bmtwMTEyMiIsImEiOiJja2NyYjU5YzMwOHM3MzBvZTJzdDAwcHV0In0.QIXyccHR_ZX9umVzA2XUUQ",
    })
    // data.features.map((user) => {

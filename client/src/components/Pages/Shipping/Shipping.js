@@ -11,12 +11,14 @@ import { createOrder } from "redux/actions/orderAction"
 import { usePromiseTracker } from "react-promise-tracker"
 // import DayPicker from "react-day-picker"
 import DayPickerInput from "react-day-picker/DayPickerInput"
+// import Esewa from "./Esewa"
 import "react-day-picker/lib/style.css"
 import dayPickerStyles from "./Daypicker.module.scss"
 import "./Shipping.scss"
 // import DatePicker from "react-datepicker"
 // import "react-datepicker/dist/react-datepicker.css"
 import Spinner from "components/UI/Spinner/Spinner"
+
 const Shipping = ({ history }) => {
    const dispatch = useDispatch()
    const { promiseInProgress } = usePromiseTracker()
@@ -26,7 +28,7 @@ const Shipping = ({ history }) => {
    const [area, setArea] = useState("")
    const [listOfArea, setListOfArea] = useState("")
    const [error, setError] = useState("")
-   const [paymentRadio, setPaymentRadio] = useState("Cash on delivery")
+   const [paymentRadio, setPaymentRadio] = useState("")
    const [deliveryCost, setDeliveryCost] = useState(0)
    const { cart } = useSelector((state) => state.cart)
    const { isAuth, loading } = useSelector((state) => state.userDetail)
@@ -70,26 +72,29 @@ const Shipping = ({ history }) => {
    const deliveryPrice = originalPrice > 1999 ? 0 : deliveryCost
 
    const onSubmit = () => {
-      if (area.length < 1 || city.length < 1 || region.length < 1) {
-         setError("Please fill out Address form")
-      } else {
-         setError("")
-         dispatch(
-            createOrder(
-               cart,
-               region,
-               city,
-               area,
-               paymentRadio,
-               originalPrice,
-               deliveryDate
+      if (deliveryDate)
+         if (area.length < 1 || city.length < 1 || region.length < 1) {
+            setError("Please fill out Address form")
+         } else {
+            setError("")
+
+            dispatch(
+               createOrder(
+                  cart,
+                  region,
+                  city,
+                  area,
+                  paymentRadio,
+                  originalPrice,
+                  deliveryDate
+               )
             )
-         )
-         dispatch({
-            type: "CART_RESET",
-         })
-         history.push(`order/complete`)
-      }
+            dispatch({
+               type: "CART_RESET",
+            })
+
+            history.push(`order/complete`)
+         }
    }
    return (
       <div>
@@ -263,7 +268,7 @@ const Shipping = ({ history }) => {
                            name='radio'
                            value='Cash on delivery'
                            className='radio'
-                           checked
+                           selected
                            style={{
                               margin: 0,
                               padding: 0,
@@ -285,7 +290,7 @@ const Shipping = ({ history }) => {
                            alignItems: "center",
                            padding: "0",
                            margin: "0",
-                           opacity: "0.7",
+                           // opacity: "0.7",
                         }}
                      >
                         <input
@@ -294,7 +299,7 @@ const Shipping = ({ history }) => {
                            name='radio'
                            className='radio'
                            value='esewa'
-                           disabled
+                           // disabled
                            style={{
                               margin: 0,
                               padding: 0,
@@ -303,7 +308,7 @@ const Shipping = ({ history }) => {
                            onClick={() => setPaymentRadio("esewa")}
                         />
                         <label htmlFor='r2' className='radio_label'>
-                           Esewa ( unavailable)
+                           Esewa
                         </label>
                      </li>
                   </div>
@@ -499,13 +504,58 @@ const Shipping = ({ history }) => {
                               {orderError}
                            </div>
                         )}
-                        <Button type='primary' onClick={onSubmit}>
-                           {promiseInProgress ? (
-                              <Spinner />
-                           ) : (
-                              "Complete payment"
-                           )}
-                        </Button>
+                        {paymentRadio === "esewa" ? (
+                           <form
+                              action='https://uat.esewa.com.np/epay/main'
+                              method='POST'
+                           >
+                              <input value='100' name='tAmt' type='hidden' />
+                              <input value='90' name='amt' type='hidden' />
+                              <input value='5' name='txAmt' type='hidden' />
+                              <input value='2' name='psc' type='hidden' />
+                              <input value='3' name='pdc' type='hidden' />
+                              <input
+                                 value='epay_payment'
+                                 name='scd'
+                                 type='hidden'
+                              />
+                              <input
+                                 value='ee2c3ca1-696b-4cc5-a6be-2c40d929d453'
+                                 name='pid'
+                                 type='hidden'
+                              />
+                              <input
+                                 value='https://dairyecommerce.herokuapp.com/shipping'
+                                 type='hidden'
+                                 name='su'
+                              />
+                              <input
+                                 value='https://dairyecommerce.herokuapp.com/shipping'
+                                 type='hidden'
+                                 name='fu'
+                              />
+                              <Button
+                                 value='Submit'
+                                 type='submit'
+                                 style={{
+                                    background: "transparent",
+                                    color: "rgb(15, 124, 144)",
+                                    marginTop: " 10px",
+                                    border: "1px solid rgb(15, 124, 144)",
+                                 }}
+                              >
+                                 Complete with esewa
+                              </Button>
+                           </form>
+                        ) : (
+                           <Button type='primary' onClick={onSubmit}>
+                              {promiseInProgress ? (
+                                 <Spinner />
+                              ) : (
+                                 "Complete payment"
+                              )}
+                           </Button>
+                        )}
                      </div>
                   </div>
                </div>
