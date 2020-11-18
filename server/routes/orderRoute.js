@@ -4,6 +4,7 @@ const router = express.Router()
 import { protectUser } from "../middlewares/authMiddleware.js"
 import Order from "../models/OrderModel.js"
 import Product from "../models/ProductModel.js"
+import User from "../models/UserModel.js"
 import { address } from "../data/address.js"
 
 //@description      add new order
@@ -33,7 +34,10 @@ router.post(
          return (ar.area = area)
       })
       const coupanPrice = itemsPrice > 2000 ? 100 : 0
-      console.log(itemsPrice)
+
+      const userInfo = await User.findById(req.userId)
+      // console.log(userInfo)
+
       if (orderItems && orderItems.length === 0) {
          res.status(400)
          throw new Error("No order item")
@@ -47,6 +51,9 @@ router.post(
                Number(itemsPrice) -
                Number(coupanPrice),
             user: req.userId,
+            userName: userInfo.firstName + " " + userInfo.lastName,
+            contact: userInfo.contact,
+            email: userInfo.email,
             shippingPrice: a.deliveryPrice,
             dateToDeliver,
          })
@@ -221,4 +228,43 @@ router.put(
       // }
    })
 )
+
+//@description      Cancel order by Id// set orderStatus to cancelled
+//@Routes           put /api/deliverystatus/:status
+//@access           private
+router.put(
+   "/deliverystatus/:status",
+   protectUser,
+   asyncHandler(async (req, res) => {
+      console.log(req.params.status)
+      console.log(req.body.orderId)
+      let update
+      // console.log(req);
+      if (req.params.status === "success") {
+         update = await Order.updateOne(req.body.orderId, {
+            orderStatus: "Delivered",
+         })
+      } else {
+         update = await Order.updateOne(req.body.orderId, {
+            orderStatus: "Failed",
+            orderId: "l",
+         })
+      }
+      console.log(update)
+      // const feedback = await Feedback.create(req.body)
+      // // console.log(req.body)
+      // if (feedback) {
+      //    return res
+      //       .json({
+      //          message: "Success",
+      //       })
+      //       .status(201)
+      // }
+      // res.status()
+      // throw new Error("Error Sending message. Try again")
+      res.send("lol")
+      // req.params.status
+   })
+)
+
 export default router

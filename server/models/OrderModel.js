@@ -7,6 +7,15 @@ const orderSchema = mongoose.Schema(
          required: true,
          ref: "User",
       },
+      userName: {
+         type: String,
+      },
+      contact: {
+         type: Number,
+      },
+      email: {
+         type: String,
+      },
       orderItems: [
          {
             _id: {
@@ -84,8 +93,18 @@ const orderSchema = mongoose.Schema(
       },
       orderStatus: {
          type: String,
-         enum: ["Processing", "Packed for delivery", "Cancelled", "Delivered"],
+         enum: [
+            "Processing",
+            "Packed for delivery",
+            "Cancelled",
+            "Delivered",
+            "Failed",
+         ],
          default: "Processing",
+      },
+      orderId: {
+         type: String,
+         default: null,
       },
       shippingPrice: {
          type: Number,
