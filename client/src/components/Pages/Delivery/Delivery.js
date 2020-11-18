@@ -8,14 +8,18 @@ const Delivery = () => {
    const dispatch = useDispatch()
    const [sort, setSort] = useState("today")
    const { loading, orders, error } = useSelector((state) => state.orderDetails)
+   console.log(sort)
+
    useEffect(() => {
       dispatch(getOrderDetails(sort))
-   }, [])
+   }, [sort, dispatch])
+   const onSortChange = (e) => {
+      setSort(e.target.value)
+   }
    console.log(orders)
    return (
       <div>
-         hello wordl
-         {/* {loading ? (
+         {loading ? (
             <div>Loading</div>
          ) : error ? (
             <div
@@ -34,19 +38,19 @@ const Delivery = () => {
                   <PageLayout style={{ height: "100%" }}>
                      <div>
                         Orders &nbsp;
-                        <span>/ &nbsp;{orders.length} order /s today</span>
+                        {/* <span>/ &nbsp;{orders.length} order /s today</span> */}
                      </div>
                   </PageLayout>
                </PageHeader>
                <div className='nav__category select_container'>
                   <select
                      className='nav__category--select select_form'
-                     onChange={onCategoryChange}
+                     onChange={onSortChange}
                   >
-                     <option value='' selected={filterOrder === ""}>
+                     <option value='all' selected={sort === " "}>
                         All
                      </option>
-                     <option value='today' selected={filterOrder === "today"}>
+                     <option value='today' selected={sort === "today"}>
                         Today
                      </option>
                   </select>
@@ -56,6 +60,7 @@ const Delivery = () => {
                   style={{
                      //  height: "60vh",
                      display: "flex",
+                     flexDirection: "column",
                      maxWidth: "600px",
                      flex: "1 1 700px",
                      justifyContent: "center",
@@ -72,6 +77,7 @@ const Delivery = () => {
                            borderLeft: "5px solid #52A43A",
                            borderRadius: "5px",
                            display: "flex",
+                           marginTop: "32px",
                         }}
                      >
                         <div
@@ -174,7 +180,7 @@ const Delivery = () => {
                                     opacity: "0.7",
                                  }}
                               >
-                                 <td>, {order.shippingPrice}</td>
+                                 <td> {order.shippingPrice}</td>
                                  <td>{order.totalPrice}</td>
                               </tr>
                            </table>
@@ -183,7 +189,7 @@ const Delivery = () => {
                   ))}
                </PageLayout>
             </>
-         )} */}
+         )}
       </div>
    )
 }

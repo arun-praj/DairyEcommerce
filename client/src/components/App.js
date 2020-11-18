@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
       /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
       font-family: 'Alegreya Sans', sans-serif;
       /* font-family: 'Varela Round', sans-serif; */
-      color: #3c3b37;
+      color: #505763;
       line-height: 1.2;
    }
    h4{

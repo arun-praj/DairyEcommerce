@@ -25,6 +25,7 @@ const CartHeader = styled.div`
 
 const CartBody = styled.main`
    padding: 40px 0;
+   min-height: 42vh;
 `
 
 const Cart = ({ match, history, location }) => {

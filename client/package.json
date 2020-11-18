@@ -16,6 +16,8 @@
     "react-content-loader": "^5.1.2",
     "react-day-picker": "^7.4.8",
     "react-dom": "^16.13.1",
+    "react-map-gl": "^5.2.10",
+    "react-mapbox-gl": "^4.8.6",
     "react-password-strength-bar": "^0.3.2",
     "react-promise-tracker": "^2.1.0",
     "react-rating": "^2.0.5",

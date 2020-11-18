@@ -56,7 +56,7 @@ const Link = ({ children, ...props }) => {
 }
 const LinkedButton = styled(Link)`
    border-radius: 3px;
-   width: 100%;
+   /* width: 100%; */
    display: block;
    padding: 10px 15px;
    margin: 0px 2px;
@@ -89,6 +89,8 @@ const DividerLine = styled.div`
 const Nav = ({ clickHandler, history }) => {
    const dispatch = useDispatch()
    const { userInfo, loading } = useSelector((state) => state.userDetail)
+   const { cart, loading: cartLoading } = useSelector((state) => state.cart)
+
    const { pathname } = useLocation()
    const { showSearchBar } = useState(false)
    const logoutHandler = () => {
@@ -131,12 +133,15 @@ const Nav = ({ clickHandler, history }) => {
             <Menu>
                <LinkedButton to='/'>Home</LinkedButton>
                <LinkedButton to='/categories'>Products</LinkedButton>
+               <LinkedButton to='/contact-us'>Contact Us</LinkedButton>
+
                <DividerLine />
 
                <StyledLink
                   to='/cart'
                   style={{
                      padding: " 15px 16px 10px 6px",
+                     position: "relative",
                   }}
                   isActive={pathname === "/cart"}
                >
@@ -158,6 +163,27 @@ const Nav = ({ clickHandler, history }) => {
                      <circle cx='17' cy='19' r='2' />
                      <path d='M3 3h2l2 12a3 3 0 0 0 3 2h7a3 3 0 0 0 3 -2l1 -7h-15.2' />
                   </svg>
+                  {cart.length !== 0 && (
+                     <span
+                        style={{
+                           position: "absolute",
+                           top: "10%",
+                           right: "10%",
+                           width: "25px",
+                           height: "25px",
+                           borderRadius: "50%",
+                           display: "flex",
+                           backgroundColor: "#dff9fbaa",
+                           fontWeight: "700",
+                           // color: "#ffff,ff",
+                           textAlign: "center",
+                           paddingTop: "3px",
+                           justifyContent: "center",
+                        }}
+                     >
+                        {cart.length}
+                     </span>
+                  )}
                </StyledLink>
 
                {loading ? (

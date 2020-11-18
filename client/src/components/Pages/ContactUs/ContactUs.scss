@@ -1,0 +1,64 @@
+.map__container {
+   height: 270px;
+   width: 500px;
+   border-radius: 6px;
+}
+.contactus {
+   display: flex;
+}
+.contactus__left {
+   margin-right: 102px;
+   display: flex;
+   flex-direction: column;
+}
+.contactus__details {
+   width: 100%;
+   font-size: 16px;
+   padding: 5px 0;
+   display: flex;
+   opacity: 0.7;
+   letter-spacing: 0.8px;
+   align-items: center;
+   //    line-height: 2px;
+}
+.contactus__icon {
+   height: 22px;
+   opacity: 0.7;
+
+   width: 22px;
+   margin-right: 8px;
+   color: #000000b0;
+   fill: #000;
+}
+.icon__group {
+   padding: 20px 0;
+}
+.contactus__right {
+   width: 100%;
+}
+.contactus__input {
+   width: 100%;
+   margin-top: 16px;
+   border: none;
+   border-radius: 4px;
+   background-color: #f2f2f2;
+}
+.contactus__textarea {
+   padding: 16px;
+   height: 160px;
+}
+@media screen and (max-width: 900px) {
+   .contactus__left {
+      margin: 0;
+      text-align: center;
+   }
+   .contactus {
+      flex-direction: column;
+   }
+   .contactus__right {
+      margin-top: 32px;
+   }
+   .map__container {
+      width: 87vw;
+   }
+}

@@ -37,6 +37,7 @@
    }
    &--img {
       width: 342px;
+      max-height: 300px;
       min-width: 100%;
       border: 1px solid #ffffff;
       border-radius: 4px;
@@ -122,6 +123,7 @@
       }
    }
 }
+
 .review {
    &__container {
       padding: 32px;
@@ -175,7 +177,14 @@
 .sendReview__btn {
    width: 50%;
 }
+.product__nav {
+   padding: 0 0 16px 0;
+}
 @media all and (max-width: 767px) {
+   .product__nav {
+      padding: 16px 0;
+      border-bottom: 1px solid #dcdadb;
+   }
    .col-2 .sidebar__container {
       display: none;
    }

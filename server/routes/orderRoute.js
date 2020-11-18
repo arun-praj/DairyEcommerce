@@ -101,7 +101,10 @@ router.get(
          order = await Order.find({
             dateToDeliver: { $gte: start, $lt: end },
          })
+      } else {
+         order = await Order.find({})
       }
+      // console.log(order[0].user)
 
       if (order) {
          res.json({

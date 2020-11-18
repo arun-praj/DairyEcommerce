@@ -25,6 +25,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
    const { userInfo, loading, isAuth } = useSelector(
       (state) => state.userDetail
    )
+   const { cart } = useSelector((state) => state.cart)
    const logoutHandler = () => {
       dispatch(logout())
       clickHandler()
@@ -182,7 +183,7 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                   className='sideDrawer__list--item'
                   onClick={() => clickHandler()}
                >
-                  <Link to='/' className='sideDrawer__list--link'>
+                  <Link to='/contact-us' className='sideDrawer__list--link'>
                      <svg className='sideDrawer__list--icon'>
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-phone-incoming' />
                      </svg>
@@ -225,6 +226,17 @@ const SideDrawer = ({ clickHandler, isSideDrawerOpen }) => {
                         <use xlinkHref='/icons/tabler-sprite.svg#tabler-shopping-cart' />
                      </svg>
                      <span>My Cart</span>
+                     {cart.length >= 1 && (
+                        <span
+                           style={{
+                              marginLeft: "16px",
+                              fontWeight: 700,
+                              color: "#007791",
+                           }}
+                        >
+                           {cart.length} item/s
+                        </span>
+                     )}
                   </Link>
                </li>
             </ul>

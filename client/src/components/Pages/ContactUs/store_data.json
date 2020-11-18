@@ -1,0 +1,40 @@
+{
+   "features": [
+      {
+         "type": "Feature",
+         "properties": {
+            "STORE_ID": 1,
+            "NAME": "Lalitpur Dhau pasal",
+            "ADDRESS": "Mahalaxmi chwok"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [85.31870946581631, 27.661521679182385]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "STORE_ID": 2,
+            "NAME": "Kathmandu Dhau pasal",
+            "ADDRESS": "Ason"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [85.31234421844147, 27.708016327757477]
+         }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+            "STORE_ID": 3,
+            "NAME": "Bhaktapur Dhau pasal",
+            "ADDRESS": "Kamalbinayak"
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [85.44021465132647, 27.67536081275729]
+         }
+      }
+   ]
+}

@@ -10,6 +10,7 @@ import productRoute from "./routes/productRoute.js"
 import cartRoute from "./routes/cartRoutes.js"
 import authRoute from "./routes/authRoute.js"
 import orderRoute from "./routes/orderRoute.js"
+import feedbackRoute from "./routes/feedbackRoute.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -26,11 +27,14 @@ app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/order", orderRoute)
+app.use("/api/feedback", feedbackRoute)
 
 console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === "production") {
    app.use(express.static(path.join(__dirname, "../client/build")))
-   app.use("*", (req, res) => res.sendFile(path.resolve(__dirname, "../client", "build", "index.html")))
+   app.use("*", (req, res) =>
+      res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"))
+   )
 } else {
    app.get("/", (req, res, next) => {
       res.send("API is running")
